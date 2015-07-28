@@ -125,7 +125,7 @@ function checkInput(input)
 
 function checkCollision()
 {
-	if(posX >= CANVAS_WIDTH) || (posX <= 0) || (posY >= CANVAS_HEIGHT) || (posY <= 0)
+	if((posX >= CANVAS_WIDTH) || (posX <= 0) || (posY >= CANVAS_HEIGHT) || (posY <= 0))
 		gameOver = true;
 }
 
