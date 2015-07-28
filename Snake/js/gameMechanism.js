@@ -17,17 +17,21 @@ $canvas.appendTo('body');
 // Getting 2d context from canvas
 var $ctx = $canvas.get(0).getContext("2d");
 
+// Position of the Snake's head
+var posX,posY;
 
 /* update method: Change direction of Snake, define if user won or lost the game, check boundaries, see if player ate a food, increase snake's size. */
 function update()
 {
-
+	posX++;
 }
 
 /* draw method: Draw Snake according with changes made from update method, Draw food if needed */
 function draw()
 {
-
+	$ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+	$ctx.fillStyle = "black";
+	$ctx.fillRect(posX,posY);
 }
 
 /* spawnFood method: Include a food spawning in some random spot inside Canvas (verifying if it is not the same spot the Snake is located) */
@@ -38,6 +42,8 @@ function spawnFood()
 
 function init()
 {
+	posX = 2;
+	posY = 2;
 	setInterval(function()
 	{
 		update();
