@@ -25,7 +25,7 @@ $canvas.appendTo('body');
 var $ctx = $canvas.get(0).getContext("2d");
 
 // Variables from the game
-var posX,posY, direction,gameOver;
+var posX,posY, direction,gameOver,posFoodX,posFoodY,showFood;
 
 /* update method: Change direction of Snake, define if user won or lost the game, check boundaries, see if player ate a food, increase snake's size. */
 function update()
@@ -51,6 +51,7 @@ function update()
 			posY+=2;
 		}
 
+		verifyFoodEaten();
 		checkCollision();
 	}
 }
@@ -66,12 +67,38 @@ function draw()
 	{
 		$ctx.fillText("Game Over, press ESC if you want to restart.",25,25);
 	}
+
+	if(showFood)
+	{
+		$ctx.fillStyle = "green";
+		$ctx.fillRect(posFoodX,posFoodY,6,6);
+	}
 }
 
 /* spawnFood method: Include a food spawning in some random spot inside Canvas (verifying if it is not the same spot the Snake is located) */
 function spawnFood()
 {
+	var foodX = getRandomInt(0,CANVAS_WIDTH);
+	var foodY = getRandomInt(0,CANVAS_HEIGHT);
 
+	while((foodX == posX) || (foodY == posX) || (foodY == posX) || (foodY == posY))
+	{
+		foodX = getRandomInt(0,CANVAS_WIDTH);
+		foodY = getRandomInt(0,CANVAS_HEIGHT);
+	}
+
+	posFoodY = foodY;
+	posFoodX = foodX;
+	showFood = true;
+}
+
+function verifyFoodEaten()
+{
+	
+}
+
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 function init()
@@ -96,6 +123,7 @@ function initializeGlobalVariables()
 	posY = 2;
 	direction = ENUM_DIRECTION.RIGHT;
 	gameOver = false;
+	showFood = false;
 }
 
 /* checkInput method: verify the input from player, changing direction's variables from Snake in order to update it inside proper method */
