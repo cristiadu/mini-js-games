@@ -24,32 +24,35 @@ $canvas.appendTo('body');
 // Getting 2d context from canvas
 var $ctx = $canvas.get(0).getContext("2d");
 
-// Position of the Snake's head
-var posX,posY, direction;
+// Variables from the game
+var posX,posY, direction,gameOver;
 
 /* update method: Change direction of Snake, define if user won or lost the game, check boundaries, see if player ate a food, increase snake's size. */
 function update()
 {
 	checkInput();
 
-	if (direction == ENUM_DIRECTION.LEFT) 
+	if(!gameOver)
 	{
-		posX-=2;
-	}
-	else if (direction == ENUM_DIRECTION.RIGHT) 
-	{
-		posX+=2;
-	}
-	else if (direction == ENUM_DIRECTION.UP) 
-	{
-		posY-=2;
-	}
-	else if (direction == ENUM_DIRECTION.DOWN) 
-	{
-		posY+=2;
-	}
+		if (direction == ENUM_DIRECTION.LEFT) 
+		{
+			posX-=2;
+		}
+		else if (direction == ENUM_DIRECTION.RIGHT) 
+		{
+			posX+=2;
+		}
+		else if (direction == ENUM_DIRECTION.UP) 
+		{
+			posY-=2;
+		}
+		else if (direction == ENUM_DIRECTION.DOWN) 
+		{
+			posY+=2;
+		}
 
-	checkCollision();
+		checkCollision();
+	}
 }
 
 /* draw method: Draw Snake according with changes made from update method, Draw food if needed */
@@ -58,6 +61,11 @@ function draw()
 	$ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 	$ctx.fillStyle = "black";
 	$ctx.fillRect(posX,posY,8,8);
+
+	if(gameOver)
+	{
+		$ctx.fillText("Game Over, press ESC if you want to restart.",25,25);
+	}
 }
 
 /* spawnFood method: Include a food spawning in some random spot inside Canvas (verifying if it is not the same spot the Snake is located) */
@@ -68,9 +76,7 @@ function spawnFood()
 
 function init()
 {
-	posX = 2;
-	posY = 2;
-	direction = ENUM_DIRECTION.RIGHT;
+	initializeGlobalVariables();
 
 	setInterval(function()
 	{
@@ -83,6 +89,15 @@ function init()
 		spawnFood();
 	},1000/FOOD_INTERVAL);
 }
+
+function initializeGlobalVariables()
+{
+	posX = 2;
+	posY = 2;
+	direction = ENUM_DIRECTION.RIGHT;
+	gameOver = false;
+}
+
 /* checkInput method: verify the input from player, changing direction's variables from Snake in order to update it inside proper method */
 function checkInput(input)
 {
@@ -102,19 +117,16 @@ function checkInput(input)
 	{
 		direction = ENUM_DIRECTION.DOWN;
 	}
+	else if(keydown.esc)
+	{
+		initializeGlobalVariables();
+	}
 }
 
 function checkCollision()
 {
-	if(posX >= CANVAS_WIDTH)
-		posX = CANVAS_WIDTH-2;
-	else if(posX <= 0)
-		posX = 0;
-
-	if(posY >= CANVAS_HEIGHT)
-		posY = CANVAS_HEIGHT-2;
-	else if(posY <= 0)
-		posY = 0;
+	if(posX >= CANVAS_WIDTH) || (posX <= 0) || (posY >= CANVAS_HEIGHT) || (posY <= 0)
+		gameOver = true;
 }
 
 $(document).ready(function(){
