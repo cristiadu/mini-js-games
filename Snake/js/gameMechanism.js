@@ -1,6 +1,6 @@
 // constants that define a size for the canvas
-var CANVAS_WIDTH = 300
-var CANVAS_HEIGHT = 150
+var CANVAS_WIDTH = 800
+var CANVAS_HEIGHT = 400
 
 // Constant that kind of definine amount of frames per second. 
 //It actually interfere in how much time it will wait until update and draw methods are executed again. 
@@ -8,6 +8,13 @@ var FRAMES_PER_SECOND = 30;
 
 // Define the interval for food exibiting
 var FOOD_INTERVAL = 0.3;
+
+var ENUM_DIRECTION = {
+	UP: 'Up',
+	DOWN: 'Down',
+	LEFT: 'Left',
+	RIGHT: 'Right'
+}
 
 // Creating canvas with width and height defined, and appending it inside the body tag
 var $canvas = $("<canvas id='snakeCanvas' width='" + CANVAS_WIDTH + 
@@ -18,12 +25,31 @@ $canvas.appendTo('body');
 var $ctx = $canvas.get(0).getContext("2d");
 
 // Position of the Snake's head
-var posX,posY;
+var posX,posY, direction;
 
 /* update method: Change direction of Snake, define if user won or lost the game, check boundaries, see if player ate a food, increase snake's size. */
 function update()
 {
-	posX++;
+	checkInput();
+
+	if (direction == ENUM_DIRECTION.LEFT) 
+	{
+		posX-=2;
+	}
+	else if (direction == ENUM_DIRECTION.RIGHT) 
+	{
+		posX+=2;
+	}
+	else if (direction == ENUM_DIRECTION.UP) 
+	{
+		posY-=2;
+	}
+	else if (direction == ENUM_DIRECTION.DOWN) 
+	{
+		posY+=2;
+	}
+
+	checkCollision();
 }
 
 /* draw method: Draw Snake according with changes made from update method, Draw food if needed */
@@ -44,6 +70,8 @@ function init()
 {
 	posX = 2;
 	posY = 2;
+	direction = ENUM_DIRECTION.RIGHT;
+
 	setInterval(function()
 	{
 		update();
@@ -58,13 +86,39 @@ function init()
 /* checkInput method: verify the input from player, changing direction's variables from Snake in order to update it inside proper method */
 function checkInput(input)
 {
+	if (keydown.left) 
+	{
+		direction = ENUM_DIRECTION.LEFT;
+	}
+	else if (keydown.right) 
+	{
+		direction = ENUM_DIRECTION.RIGHT;
+	}
+	else if(keydown.up)
+	{
+		direction = ENUM_DIRECTION.UP;
+	}
+	else if(keydown.down)
+	{
+		direction = ENUM_DIRECTION.DOWN;
+	}
+}
 
+function checkCollision()
+{
+	if(posX >= CANVAS_WIDTH)
+		posX = CANVAS_WIDTH-2;
+	else if(posX <= 0)
+		posX = 0;
+
+	if(posY >= CANVAS_HEIGHT)
+		posY = CANVAS_HEIGHT-2;
+	else if(posY <= 0)
+		posY = 0;
 }
 
 $(document).ready(function(){
 	init();
-
-
 });
 
 
