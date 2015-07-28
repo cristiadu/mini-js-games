@@ -7,7 +7,7 @@ var CANVAS_HEIGHT = 400
 var FRAMES_PER_SECOND = 30;
 
 // Define the interval for food exibiting
-var FOOD_INTERVAL = 0.3;
+var FOOD_INTERVAL = 0.1;
 
 var ENUM_DIRECTION = {
 	UP: 'Up',
@@ -25,7 +25,7 @@ $canvas.appendTo('body');
 var $ctx = $canvas.get(0).getContext("2d");
 
 // Variables from the game
-var posX,posY, direction,gameOver,posFoodX,posFoodY,showFood;
+var posX,posY, direction,gameOver,posFoodX,posFoodY,showFood,foodEaten;
 
 /* update method: Change direction of Snake, define if user won or lost the game, check boundaries, see if player ate a food, increase snake's size. */
 function update()
@@ -81,7 +81,7 @@ function spawnFood()
 	var foodX = getRandomInt(0,CANVAS_WIDTH);
 	var foodY = getRandomInt(0,CANVAS_HEIGHT);
 
-	while((foodX == posX) || (foodY == posX) || (foodY == posX) || (foodY == posY))
+	while((foodX == posX) && (foodY == posY))
 	{
 		foodX = getRandomInt(0,CANVAS_WIDTH);
 		foodY = getRandomInt(0,CANVAS_HEIGHT);
@@ -94,7 +94,11 @@ function spawnFood()
 
 function verifyFoodEaten()
 {
-	
+	if((posFoodX == posX) && (posFoodY == posY))
+	{
+		showFood = false;
+		foodEaten = true;
+	}
 }
 
 function getRandomInt(min, max) {
@@ -124,6 +128,7 @@ function initializeGlobalVariables()
 	direction = ENUM_DIRECTION.RIGHT;
 	gameOver = false;
 	showFood = false;
+	foodEaten = false;
 }
 
 /* checkInput method: verify the input from player, changing direction's variables from Snake in order to update it inside proper method */
