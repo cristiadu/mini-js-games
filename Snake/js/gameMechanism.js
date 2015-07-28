@@ -31,7 +31,7 @@ function draw()
 {
 	$ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 	$ctx.fillStyle = "black";
-	$ctx.fillRect(posX,posY,1,1);
+	$ctx.fillRect(posX,posY,8,8);
 }
 
 /* spawnFood method: Include a food spawning in some random spot inside Canvas (verifying if it is not the same spot the Snake is located) */
