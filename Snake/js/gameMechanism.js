@@ -25,9 +25,9 @@ $canvas.appendTo('body');
 var $ctx = $canvas.get(0).getContext("2d");
 
 // Variables from the game
-var posX,posY, direction,gameOver;
+var direction,gameOver;
 var foodJson;
-
+var snakeBlocks;
 /* update method: Change direction of Snake, define if user won or lost the game, check boundaries, see if player ate a food, increase snake's size. */
 function update()
 {
@@ -35,21 +35,33 @@ function update()
 
 	if(!gameOver)
 	{
-		if (direction == ENUM_DIRECTION.LEFT) 
+		// I need to find a better solution here than this one, but for now, I think it works.
+		var oldBlocks = JSON.parse(JSON.stringify(snakeBlocks));
+
+		for(i in snakeBlocks)
 		{
-			posX-=2;
-		}
-		else if (direction == ENUM_DIRECTION.RIGHT) 
-		{
-			posX+=2;
-		}
-		else if (direction == ENUM_DIRECTION.UP) 
-		{
-			posY-=2;
-		}
-		else if (direction == ENUM_DIRECTION.DOWN) 
-		{
-			posY+=2;
+			if(i != 0)
+				snakeBlocks[i].direction = oldBlocks[i-1].direction;
+			else
+				snakeBlocks[i].direction = direction;
+
+			if (snakeBlocks[i].direction == ENUM_DIRECTION.LEFT) 
+			{
+				snakeBlocks[i].posX-=2;
+			}
+			else if (snakeBlocks[i].direction == ENUM_DIRECTION.RIGHT) 
+			{
+				snakeBlocks[i].posX+=2;
+			}
+			else if (snakeBlocks[i].direction == ENUM_DIRECTION.UP) 
+			{
+				snakeBlocks[i].posY-=2;
+			}
+			else if (snakeBlocks[i].direction == ENUM_DIRECTION.DOWN) 
+			{
+				snakeBlocks[i].posY+=2;
+			}
+
 		}
 
 		verifyFoodEaten();
@@ -57,12 +69,19 @@ function update()
 	}
 }
 
+
+
 /* draw method: Draw Snake according with changes made from update method, Draw food if needed */
 function draw()
 {
 	$ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 	$ctx.fillStyle = "black";
-	$ctx.fillRect(posX,posY,8,8);
+
+	for(i in snakeBlocks)
+	{
+		$ctx.fillRect(snakeBlocks[i].posX,snakeBlocks[i].posY,8,8);
+		
+	}
 
 	if(gameOver)
 	{
@@ -84,7 +103,7 @@ function spawnFood()
 	var foodX = getRandomInt(0,CANVAS_WIDTH);
 	var foodY = getRandomInt(0,CANVAS_HEIGHT);
 
-	while((foodX == posX) && (foodY == posY))
+	while((foodX == snakeBlocks[0].posX) && (foodY == snakeBlocks[0].posY))
 	{
 		foodX = getRandomInt(0,CANVAS_WIDTH);
 		foodY = getRandomInt(0,CANVAS_HEIGHT);
@@ -105,7 +124,7 @@ function verifyFoodEaten()
 
 	for(i in foodJson)
 	{
-		if((between(foodJson[i].posX,posX-4,posX+4))&&(between(foodJson[i].posY,posY-4,posY+4)))
+		if((between(foodJson[i].posX,snakeBlocks[0].posX-4,snakeBlocks[0].posX+4))&&(between(foodJson[i].posY,snakeBlocks[0].posY-4,snakeBlocks[0].posY+4)))
 		{
 			console.log("Yeah, I ate!");
 			delete foodJson[i];
@@ -142,11 +161,14 @@ function init()
 
 function initializeGlobalVariables()
 {
-	posX = 2;
-	posY = 2;
 	direction = ENUM_DIRECTION.RIGHT;
 	gameOver = false;
 	foodJson = [];
+	snakeBlocks = [{
+		'posX': 2,
+		'posY': 2,
+		'direction': ENUM_DIRECTION.RIGHT
+	}];
 	
 }
 
@@ -177,7 +199,7 @@ function checkInput(input)
 
 function checkCollision()
 {
-	if((posX >= CANVAS_WIDTH) || (posX <= 0) || (posY >= CANVAS_HEIGHT) || (posY <= 0))
+	if((snakeBlocks[0].posX >= CANVAS_WIDTH) || (snakeBlocks[0].posX <= 0) || (snakeBlocks[0].posY >= CANVAS_HEIGHT) || (snakeBlocks[0].posY <= 0))
 		gameOver = true;
 }
 
