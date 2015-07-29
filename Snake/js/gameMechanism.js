@@ -43,7 +43,10 @@ function update()
 
 		for(i in snakeBlocks)
 		{
-			
+			if(i != 0)
+				snakeBlocks[i].direction = oldBlocks[i-1].direction;
+			else
+				snakeBlocks[i].direction = direction;
 	
 
 			if (snakeBlocks[i].direction == ENUM_DIRECTION.LEFT) 
@@ -62,12 +65,7 @@ function update()
 			{
 				snakeBlocks[i].posY+=4;
 			}
-
-			if(i != 0)
-				snakeBlocks[i].direction = oldBlocks[i-1].direction;
-			else
-				snakeBlocks[i].direction = direction;
-
+	
 		}
 
 
@@ -164,8 +162,8 @@ function increaseSizeSnake()
 	else if (snakeBlocks[snakeBlocks.length -1].direction == ENUM_DIRECTION.UP) 
 	{
 		snakeBlocks.push({
-		'posX': snakeBlocks[snakeBlocks.length -1].posY-4,
-		'posY': snakeBlocks[snakeBlocks.length -1].posY,
+		'posX': snakeBlocks[snakeBlocks.length -1].posX,
+		'posY': snakeBlocks[snakeBlocks.length -1].posY-4,
 		'direction': snakeBlocks[snakeBlocks.length -1].direction
 		});
 
@@ -173,8 +171,8 @@ function increaseSizeSnake()
 	else if (snakeBlocks[snakeBlocks.length -1].direction == ENUM_DIRECTION.DOWN) 
 	{
 		snakeBlocks.push({
-		'posX': snakeBlocks[snakeBlocks.length -1].posY+4,
-		'posY': snakeBlocks[snakeBlocks.length -1].posY,
+		'posX': snakeBlocks[snakeBlocks.length -1].posX,
+		'posY': snakeBlocks[snakeBlocks.length -1].posY+4,
 		'direction': snakeBlocks[snakeBlocks.length -1].direction
 		});
 	}
