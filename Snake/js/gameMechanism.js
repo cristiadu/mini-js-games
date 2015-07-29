@@ -7,8 +7,8 @@ var CANVAS_HEIGHT = 400
 var FRAMES_PER_SECOND = 30;
 
 // Define the interval for food exibiting
-var FOOD_INTERVAL = 0.7;
-var FOOD_REMOVAL_INTERVAL = 0.2;
+var FOOD_INTERVAL = 0.25;
+var FOOD_REMOVAL_INTERVAL = 0.05;
 
 var ENUM_DIRECTION = {
 	UP: 'Up',
@@ -257,12 +257,13 @@ function checkInput(input)
 
 function checkCollision()
 {
-	if((between(CANVAS_WIDTH,snakeBlocks[0].posX-4,snakeBlocks[0].posX+4))||(between(0,snakeBlocks[0].posX-4,snakeBlocks[0].posX+4)) || 
-		(between(0,snakeBlocks[0].posY-4,snakeBlocks[0].posY+4)) || (between(CANVAS_HEIGHT,snakeBlocks[0].posY-4,snakeBlocks[0].posY+4)))
+	// With the walls
+	if((snakeBlocks[0].posX + 10 >= CANVAS_WIDTH) || (snakeBlocks[0].posX <= 0) || (snakeBlocks[0].posY + 10 >= CANVAS_HEIGHT ) || (snakeBlocks[0].posY <= 0))
 	{
 		gameOver = true;
 		console.log(snakeBlocks);
 	}
+
 }
 
 $(document).ready(function(){
