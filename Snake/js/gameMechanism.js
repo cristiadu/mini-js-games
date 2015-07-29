@@ -257,7 +257,8 @@ function checkInput(input)
 
 function checkCollision()
 {
-	if((snakeBlocks[0].posX >= CANVAS_WIDTH) || (snakeBlocks[0].posX <= 0) || (snakeBlocks[0].posY >= CANVAS_HEIGHT) || (snakeBlocks[0].posY <= 0))
+	if((between(CANVAS_WIDTH,snakeBlocks[0].posX-4,snakeBlocks[0].posX+4))||(between(0,snakeBlocks[0].posX-4,snakeBlocks[0].posX+4)) || 
+		(between(0,snakeBlocks[0].posY-4,snakeBlocks[0].posY+4)) || (between(CANVAS_HEIGHT,snakeBlocks[0].posY-4,snakeBlocks[0].posY+4)))
 	{
 		gameOver = true;
 		console.log(snakeBlocks);
