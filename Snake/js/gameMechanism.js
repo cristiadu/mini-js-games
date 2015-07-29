@@ -38,34 +38,39 @@ function update()
 		// I need to find a better solution here than this one, but for now, I think it works.
 		var oldBlocks = JSON.parse(JSON.stringify(snakeBlocks));
 
+		verifyFoodEaten();
+		checkCollision();
+
 		for(i in snakeBlocks)
 		{
+			
+	
+
+			if (snakeBlocks[i].direction == ENUM_DIRECTION.LEFT) 
+			{
+				snakeBlocks[i].posX-=4;
+			}
+			else if (snakeBlocks[i].direction == ENUM_DIRECTION.RIGHT) 
+			{
+				snakeBlocks[i].posX+=4;
+			}
+			else if (snakeBlocks[i].direction == ENUM_DIRECTION.UP) 
+			{
+				snakeBlocks[i].posY-=4;
+			}
+			else if (snakeBlocks[i].direction == ENUM_DIRECTION.DOWN) 
+			{
+				snakeBlocks[i].posY+=4;
+			}
+
 			if(i != 0)
 				snakeBlocks[i].direction = oldBlocks[i-1].direction;
 			else
 				snakeBlocks[i].direction = direction;
 
-			if (snakeBlocks[i].direction == ENUM_DIRECTION.LEFT) 
-			{
-				snakeBlocks[i].posX-=2;
-			}
-			else if (snakeBlocks[i].direction == ENUM_DIRECTION.RIGHT) 
-			{
-				snakeBlocks[i].posX+=2;
-			}
-			else if (snakeBlocks[i].direction == ENUM_DIRECTION.UP) 
-			{
-				snakeBlocks[i].posY-=2;
-			}
-			else if (snakeBlocks[i].direction == ENUM_DIRECTION.DOWN) 
-			{
-				snakeBlocks[i].posY+=2;
-			}
-
 		}
 
-		verifyFoodEaten();
-		checkCollision();
+
 	}
 }
 
@@ -132,10 +137,48 @@ function verifyFoodEaten()
 			break;
 		}
 	}
+	console.log(snakeBlocks);
 }
 
 function increaseSizeSnake()
 {
+	if (snakeBlocks[snakeBlocks.length -1].direction == ENUM_DIRECTION.LEFT) 
+	{
+		snakeBlocks.push({
+		'posX': snakeBlocks[snakeBlocks.length -1].posX-=4,
+		'posY': snakeBlocks[snakeBlocks.length -1].posY,
+		'direction': snakeBlocks[snakeBlocks.length -1].direction
+		});
+
+		
+	}
+	else if (snakeBlocks[snakeBlocks.length -1].direction == ENUM_DIRECTION.RIGHT) 
+	{
+		snakeBlocks.push({
+		'posX': snakeBlocks[snakeBlocks.length -1].posX+=4,
+		'posY': snakeBlocks[snakeBlocks.length -1].posY,
+		'direction': snakeBlocks[snakeBlocks.length -1].direction
+		});
+
+	}
+	else if (snakeBlocks[snakeBlocks.length -1].direction == ENUM_DIRECTION.UP) 
+	{
+		snakeBlocks.push({
+		'posX': snakeBlocks[snakeBlocks.length -1].posY-=4,
+		'posY': snakeBlocks[snakeBlocks.length -1].posY,
+		'direction': snakeBlocks[snakeBlocks.length -1].direction
+		});
+
+	}
+	else if (snakeBlocks[snakeBlocks.length -1].direction == ENUM_DIRECTION.DOWN) 
+	{
+		snakeBlocks.push({
+		'posX': snakeBlocks[snakeBlocks.length -1].posY+=4,
+		'posY': snakeBlocks[snakeBlocks.length -1].posY,
+		'direction': snakeBlocks[snakeBlocks.length -1].direction
+		});
+	}
+
 
 }
 
