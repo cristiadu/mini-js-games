@@ -18,14 +18,15 @@ var ENUM_DIRECTION = {
 
 // Creating canvas with width and height defined, and appending it inside the body tag
 var $canvas = $("<canvas id='snakeCanvas' width='" + CANVAS_WIDTH + 
-                      "' height='" + CANVAS_HEIGHT + "'></canvas>");
+                      "' height='" + CANVAS_HEIGHT + "' style='border:1px solid #000000;'></canvas>");
 $canvas.appendTo('body');
 
 // Getting 2d context from canvas
 var $ctx = $canvas.get(0).getContext("2d");
 
 // Variables from the game
-var posX,posY, direction,gameOver,posFoodX,posFoodY,showFood,foodEaten;
+var posX,posY, direction,gameOver;
+var foodJson;
 
 /* update method: Change direction of Snake, define if user won or lost the game, check boundaries, see if player ate a food, increase snake's size. */
 function update()
@@ -68,10 +69,12 @@ function draw()
 		$ctx.fillText("Game Over, press ESC if you want to restart.",25,25);
 	}
 
-	if(showFood)
+	$ctx.fillStyle = "green";
+
+	for(i in foodJson)
 	{
-		$ctx.fillStyle = "green";
-		$ctx.fillRect(posFoodX,posFoodY,6,6);
+		$ctx.fillRect(foodJson[i].posX,foodJson[i].posY,4,4);
+		
 	}
 }
 
@@ -87,18 +90,34 @@ function spawnFood()
 		foodY = getRandomInt(0,CANVAS_HEIGHT);
 	}
 
-	posFoodY = foodY;
-	posFoodX = foodX;
-	showFood = true;
+	foodJson.push({
+		'posX': foodX,
+		'posY': foodY
+	});
+}
+
+function between(x, min, max) {
+  return x >= min && x <= max;
 }
 
 function verifyFoodEaten()
 {
-	if((posFoodX == posX) && (posFoodY == posY))
+
+	for(i in foodJson)
 	{
-		showFood = false;
-		foodEaten = true;
+		if((between(foodJson[i].posX,posX-4,posX+4))&&(between(foodJson[i].posY,posY-4,posY+4)))
+		{
+			console.log("Yeah, I ate!");
+			delete foodJson[i];
+			increaseSizeSnake();
+			break;
+		}
 	}
+}
+
+function increaseSizeSnake()
+{
+
 }
 
 function getRandomInt(min, max) {
@@ -127,8 +146,8 @@ function initializeGlobalVariables()
 	posY = 2;
 	direction = ENUM_DIRECTION.RIGHT;
 	gameOver = false;
-	showFood = false;
-	foodEaten = false;
+	foodJson = [];
+	
 }
 
 /* checkInput method: verify the input from player, changing direction's variables from Snake in order to update it inside proper method */
