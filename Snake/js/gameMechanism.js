@@ -8,6 +8,7 @@ var FRAMES_PER_SECOND = 30;
 
 // Define the interval for food exibiting
 var FOOD_INTERVAL = 0.1;
+var FOOD_REMOVAL_INTERVAL = 0.5;
 
 var ENUM_DIRECTION = {
 	UP: 'Up',
@@ -38,16 +39,10 @@ function update()
 		// I need to find a better solution here than this one, but for now, I think it works.
 		var oldBlocks = JSON.parse(JSON.stringify(snakeBlocks));
 
-		verifyFoodEaten();
-		checkCollision();
-
+		console.log(oldBlocks);
 		for(i in snakeBlocks)
 		{
-			if(i != 0)
-				snakeBlocks[i].direction = oldBlocks[i-1].direction;
-			else
-				snakeBlocks[i].direction = direction;
-	
+			
 
 			if (snakeBlocks[i].direction == ENUM_DIRECTION.LEFT) 
 			{
@@ -65,10 +60,18 @@ function update()
 			{
 				snakeBlocks[i].posY+=4;
 			}
+
+			if(i != 0)
+				snakeBlocks[i].direction = oldBlocks[i-1].direction;
+			else
+				snakeBlocks[i].direction = direction;
 	
 		}
 
 
+
+		verifyFoodEaten();
+		checkCollision();
 	}
 }
 
@@ -116,6 +119,15 @@ function spawnFood()
 		'posX': foodX,
 		'posY': foodY
 	});
+
+	removeFood();
+}
+
+function removeFood()
+{
+	setInterval(function(){
+		delete foodJson[foodJson.length -1];
+	},1000/FOOD_REMOVAL_INTERVAL);
 }
 
 function between(x, min, max) {
@@ -129,7 +141,6 @@ function verifyFoodEaten()
 	{
 		if((between(foodJson[i].posX,snakeBlocks[0].posX-4,snakeBlocks[0].posX+4))&&(between(foodJson[i].posY,snakeBlocks[0].posY-4,snakeBlocks[0].posY+4)))
 		{
-			console.log("Yeah, I ate!");
 			delete foodJson[i];
 			increaseSizeSnake();
 			break;
@@ -143,7 +154,7 @@ function increaseSizeSnake()
 	if (snakeBlocks[snakeBlocks.length -1].direction == ENUM_DIRECTION.LEFT) 
 	{
 		snakeBlocks.push({
-		'posX': snakeBlocks[snakeBlocks.length -1].posX-4,
+		'posX': snakeBlocks[snakeBlocks.length -1].posX+4,
 		'posY': snakeBlocks[snakeBlocks.length -1].posY,
 		'direction': snakeBlocks[snakeBlocks.length -1].direction
 		});
@@ -153,7 +164,7 @@ function increaseSizeSnake()
 	else if (snakeBlocks[snakeBlocks.length -1].direction == ENUM_DIRECTION.RIGHT) 
 	{
 		snakeBlocks.push({
-		'posX': snakeBlocks[snakeBlocks.length -1].posX+4,
+		'posX': snakeBlocks[snakeBlocks.length -1].posX-4,
 		'posY': snakeBlocks[snakeBlocks.length -1].posY,
 		'direction': snakeBlocks[snakeBlocks.length -1].direction
 		});
@@ -163,7 +174,7 @@ function increaseSizeSnake()
 	{
 		snakeBlocks.push({
 		'posX': snakeBlocks[snakeBlocks.length -1].posX,
-		'posY': snakeBlocks[snakeBlocks.length -1].posY-4,
+		'posY': snakeBlocks[snakeBlocks.length -1].posY+4,
 		'direction': snakeBlocks[snakeBlocks.length -1].direction
 		});
 
@@ -172,11 +183,10 @@ function increaseSizeSnake()
 	{
 		snakeBlocks.push({
 		'posX': snakeBlocks[snakeBlocks.length -1].posX,
-		'posY': snakeBlocks[snakeBlocks.length -1].posY+4,
+		'posY': snakeBlocks[snakeBlocks.length -1].posY-4,
 		'direction': snakeBlocks[snakeBlocks.length -1].direction
 		});
 	}
-
 
 }
 
@@ -241,7 +251,10 @@ function checkInput(input)
 function checkCollision()
 {
 	if((snakeBlocks[0].posX >= CANVAS_WIDTH) || (snakeBlocks[0].posX <= 0) || (snakeBlocks[0].posY >= CANVAS_HEIGHT) || (snakeBlocks[0].posY <= 0))
+	{
 		gameOver = true;
+		console.log(snakeBlocks);
+	}
 }
 
 $(document).ready(function(){
