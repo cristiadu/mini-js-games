@@ -7,8 +7,8 @@ var CANVAS_HEIGHT = 400
 var FRAMES_PER_SECOND = 30;
 
 // Define the interval for food exibiting
-var FOOD_INTERVAL = 0.1;
-var FOOD_REMOVAL_INTERVAL = 0.5;
+var FOOD_INTERVAL = 0.7;
+var FOOD_REMOVAL_INTERVAL = 0.2;
 
 var ENUM_DIRECTION = {
 	UP: 'Up',
@@ -109,26 +109,33 @@ function spawnFood()
 	var foodX = getRandomInt(0,CANVAS_WIDTH);
 	var foodY = getRandomInt(0,CANVAS_HEIGHT);
 
-	while((foodX == snakeBlocks[0].posX) && (foodY == snakeBlocks[0].posY))
+	if(!gameOver)
 	{
-		foodX = getRandomInt(0,CANVAS_WIDTH);
-		foodY = getRandomInt(0,CANVAS_HEIGHT);
+		while((foodX == snakeBlocks[0].posX) && (foodY == snakeBlocks[0].posY))
+		{
+			foodX = getRandomInt(0,CANVAS_WIDTH);
+			foodY = getRandomInt(0,CANVAS_HEIGHT);
+		}
+
+		foodJson.push({
+			'posX': foodX,
+			'posY': foodY
+		});
+
+		setInterval(function(){
+			for(j in foodJson)
+			{
+				if((foodJson[j].posX == foodX) &&(foodJson[j].posY == foodY))
+				{
+					delete foodJson[j];
+					break;
+				}
+			}
+		},1000/FOOD_REMOVAL_INTERVAL);
 	}
-
-	foodJson.push({
-		'posX': foodX,
-		'posY': foodY
-	});
-
-	removeFood();
 }
 
-function removeFood()
-{
-	setInterval(function(){
-		delete foodJson[foodJson.length -1];
-	},1000/FOOD_REMOVAL_INTERVAL);
-}
+
 
 function between(x, min, max) {
   return x >= min && x <= max;
