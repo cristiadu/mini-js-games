@@ -137,7 +137,7 @@ function verifyFoodEaten()
 			break;
 		}
 	}
-	console.log(snakeBlocks);
+
 }
 
 function increaseSizeSnake()
@@ -145,7 +145,7 @@ function increaseSizeSnake()
 	if (snakeBlocks[snakeBlocks.length -1].direction == ENUM_DIRECTION.LEFT) 
 	{
 		snakeBlocks.push({
-		'posX': snakeBlocks[snakeBlocks.length -1].posX-=4,
+		'posX': snakeBlocks[snakeBlocks.length -1].posX-4,
 		'posY': snakeBlocks[snakeBlocks.length -1].posY,
 		'direction': snakeBlocks[snakeBlocks.length -1].direction
 		});
@@ -155,7 +155,7 @@ function increaseSizeSnake()
 	else if (snakeBlocks[snakeBlocks.length -1].direction == ENUM_DIRECTION.RIGHT) 
 	{
 		snakeBlocks.push({
-		'posX': snakeBlocks[snakeBlocks.length -1].posX+=4,
+		'posX': snakeBlocks[snakeBlocks.length -1].posX+4,
 		'posY': snakeBlocks[snakeBlocks.length -1].posY,
 		'direction': snakeBlocks[snakeBlocks.length -1].direction
 		});
@@ -164,7 +164,7 @@ function increaseSizeSnake()
 	else if (snakeBlocks[snakeBlocks.length -1].direction == ENUM_DIRECTION.UP) 
 	{
 		snakeBlocks.push({
-		'posX': snakeBlocks[snakeBlocks.length -1].posY-=4,
+		'posX': snakeBlocks[snakeBlocks.length -1].posY-4,
 		'posY': snakeBlocks[snakeBlocks.length -1].posY,
 		'direction': snakeBlocks[snakeBlocks.length -1].direction
 		});
@@ -173,7 +173,7 @@ function increaseSizeSnake()
 	else if (snakeBlocks[snakeBlocks.length -1].direction == ENUM_DIRECTION.DOWN) 
 	{
 		snakeBlocks.push({
-		'posX': snakeBlocks[snakeBlocks.length -1].posY+=4,
+		'posX': snakeBlocks[snakeBlocks.length -1].posY+4,
 		'posY': snakeBlocks[snakeBlocks.length -1].posY,
 		'direction': snakeBlocks[snakeBlocks.length -1].direction
 		});
