@@ -15,3 +15,5 @@ RIGHT: 'Right'
 
 var BALL_RADIUS = 4;
 var SIZE_PADDLE = 8;
+var THICKNESS_PADDLE = 4;
+var VELOCITY_PADDLE = 4;
