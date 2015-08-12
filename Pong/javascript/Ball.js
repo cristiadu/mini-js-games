@@ -39,9 +39,18 @@ Ball.prototype.checkCollisionWithHorizontalWall = function () {
 Ball.prototype.changeDirection = function (bounceAngle) {
 
 	// It hit a paddle, so increase speed.
-	this.vX = -(this.vX+1.00)*Math.cos(bounceAngle);
-	this.vY = -(this.vY+1.00)*(-Math.sin(bounceAngle));
+	if(this.vX < 0)
+	{
+		this.vX = -(this.vX + (-1.00)*Math.cos(bounceAngle));
+		this.vY = (this.vY + (-1.00)*(-Math.sin(bounceAngle)));
+	}
+	else
+	{
+		this.vY = (this.vY + (1.00)*(-Math.sin(bounceAngle)));
+		this.vX = -(this.vX + (1.00)*Math.cos(bounceAngle));
+	}
 
+	
 	console.log("I changed! vx "+this.vX+" vy "+this.vY);
 };
 
