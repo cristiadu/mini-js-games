@@ -4,11 +4,17 @@ function Paddle(pos, pType){
 	this.position = pos;
 	this.X = 0;
 	this.Y = 0;
+	this.points = 0;
 }
 
 
 Paddle.prototype.update = function () {
-	this.checkInput();
+	
+	if(this.playerType == PLAYER_TYPE.AI)
+		this.moveAI();
+	else
+		this.checkInput();
+
 	this.checkCollisionWithWall();
 };
 
@@ -20,20 +26,41 @@ Paddle.prototype.draw = function (ctx,dt) {
 
 Paddle.prototype.checkInput = function () {
 
-	if(this.position == PLAYERS.HUMAN)
+	if(this.playerType == PLAYER_TYPE.HUMAN)
 	{
-
+		if(Keyboard.isDown(KEYCODES.down))
+			this.Y += VELOCITY_PADDLE;
+		else if(Keyboard.isDown(KEYCODES.up))
+			this.Y -= VELOCITY_PADDLE;
 	}
-	else if(this.position == PLAYERS.HUMAN2)
+	else if(this.playerType == PLAYER_TYPE.HUMAN2)
 	{
-
+		if(Keyboard.isDown(KEYCODES.w))
+	        this.Y += VELOCITY_PADDLE;
+		else if(Keyboard.isDown(KEYCODES.s))
+			this.Y -= VELOCITY_PADDLE;
+		
 	}
 
 };
 
+Paddle.prototype.moveAI = function () {
+
+
+};
+
+// Used to calculate the angles
+Paddle.prototype.getBounceAngle = function (intersectY) 
+{
+	// Y position relative to paddle height.
+	var relativeIntersection = this.Y + (SIZE_PADDLE/2) - intersectY;
+
+	return (relativeIntersection/(SIZE_PADDLE/2))*MAX_BOUNCE_ANGLE;
+};
+
 Paddle.prototype.checkCollisionWithWall = function () {
 
-	// Collision with the wall
+	// Collision with wall
 };
 
 Paddle.prototype.init = function () {
@@ -47,12 +74,8 @@ Paddle.prototype.init = function () {
 		this.X = 0;
 		this.Y = game.height/2;
 	}
-	else
-	{
-		this.X = 0;
-		this.Y = game.height/2;
-	}
 
+	this.points = 0;
 };
 
 
