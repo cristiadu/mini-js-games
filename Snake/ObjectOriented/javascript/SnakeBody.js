@@ -13,7 +13,7 @@ SnakeBody.prototype.update = function()
     // Next element will get direction from before the update
     this.lastDirection = this.direction;
     this.direction = this.prev.lastDirection;
-
+    
     switch(this.direction)
     {
         case DIRECTION.RIGHT:
@@ -60,10 +60,10 @@ SnakeBody.prototype.increase = function()
                 this.next = new SnakeBody(this.X + SIZE_SNAKE,this.Y,this);
             break;
             case DIRECTION.UP:
-                this.next = new SnakeBody(this.X,this.Y - SIZE_SNAKE,this);
+                this.next = new SnakeBody(this.X,this.Y + SIZE_SNAKE,this);
             break;
             case DIRECTION.DOWN:
-                this.next = new SnakeBody(this.X,this.Y + SIZE_SNAKE,this);
+                this.next = new SnakeBody(this.X,this.Y - SIZE_SNAKE,this);
             break;
             default:
                 this.next = new SnakeBody(this.X - SIZE_SNAKE,this.Y,this);

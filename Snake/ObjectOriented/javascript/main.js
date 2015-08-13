@@ -3,7 +3,7 @@
     var cfg = {
         width: 800,
         height: 800,
-        fps: 40
+        fps: 20
     },
     gameMachine = new GameMachine( game, cfg, '.gameStage' );
 

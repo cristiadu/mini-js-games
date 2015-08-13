@@ -37,6 +37,7 @@ SnakeHead.prototype.update = function()
     }
 
     this.body.update();
+    this.lastDirection = this.direction;
     this.checkCollision();
 
     

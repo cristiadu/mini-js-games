@@ -12,7 +12,6 @@ PongGame.prototype.update = function () {
 	this.ball.update();
 	
 	
-
 	this.player1Paddle.update();
 	this.player2Paddle.update();
 

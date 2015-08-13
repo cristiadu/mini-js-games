@@ -43,8 +43,10 @@ SnakeGame.prototype.checkInput = function () {
 		else if(Keyboard.isDown(ARROWS_KEYCODES.up)  && (this.snake.direction != DIRECTION.DOWN))
 			direction = DIRECTION.UP;
 
+
 		if(direction != null)
 			this.snake.changeDirection(direction);
+
 	}
 	else if(Keyboard.isDown(27))
 	{
