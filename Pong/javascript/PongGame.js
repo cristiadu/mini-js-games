@@ -22,6 +22,10 @@ PongGame.prototype.draw = function (ctx,dt) {
 	this.player1Paddle.draw(ctx,dt);
 	this.player2Paddle.draw(ctx,dt);
 	this.ball.draw(ctx,dt);
+
+	ctx.fillStyle = '#fff';
+	ctx.font = "48px Monospace";
+  	ctx.fillText(this.player1Paddle.points+" X "+this.player2Paddle.points, (game.width-100)/2, 50);
 };
 
 PongGame.prototype.checkCollisionBallwithPaddle = function () 
@@ -45,7 +49,12 @@ PongGame.prototype.checkCollisionBallwithPaddle = function ()
 
 PongGame.prototype.scorePoint = function (pos) 
 {
-	//this.ball.init();
+	if(pos == POSITION.LEFT)
+		this.player2Paddle.points++;
+	else if(pos == POSITION.RIGHT)
+		this.player1Paddle.points++;
+
+	this.ball.init();
 };
 
 PongGame.prototype.init = function () {

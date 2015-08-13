@@ -14,7 +14,6 @@
 			var evt = window.event || event;
 			var code = evt.which || evt.keyCode;
 			self.mapedKeys[code] = true;
-			console.log(code);
 		};
 
 		this.keyUp = function ( event ) {

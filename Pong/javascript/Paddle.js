@@ -18,13 +18,15 @@ Paddle.prototype.update = function () {
 	this.checkCollisionWithWall();
 };
 
-Paddle.prototype.draw = function (ctx,dt) {
+Paddle.prototype.draw = function (ctx,dt) 
+{
   	ctx.fillStyle = '#fff';
     ctx.fillRect(this.X, this.Y, THICKNESS_PADDLE, SIZE_PADDLE);
 };
 
 
-Paddle.prototype.checkInput = function () {
+Paddle.prototype.checkInput = function () 
+{
 
 	if(this.playerType == PLAYER_TYPE.HUMAN)
 	{
@@ -61,6 +63,10 @@ Paddle.prototype.getBounceAngle = function (intersectY)
 Paddle.prototype.checkCollisionWithWall = function () {
 
 	// Collision with wall
+	if(this.Y <= 0)
+		this.Y = 0;
+	else if(this.Y + SIZE_PADDLE >= game.height)
+		this.Y = game.height - SIZE_PADDLE;
 };
 
 Paddle.prototype.init = function () {
