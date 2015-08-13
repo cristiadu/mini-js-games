@@ -1,7 +1,7 @@
 (function () {
-    window.game = new PongGame(800,800);
+    window.game = new PongGame(1000,800);
     var cfg = {
-        width: 800,
+        width: 1000,
         height: 800,
         fps: 60
     },
