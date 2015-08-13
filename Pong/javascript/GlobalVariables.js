@@ -12,15 +12,6 @@ RIGHT: 'Right'
 };
 
 
-// Directions constantes
-var DIRECTION = {
-LEFT: 'Left',
-RIGHT: 'Right',
-UP: 'Up',
-DOWN: 'Down',
-STRAIGHT: 'Straight'
-};
-
   // Declaring the positions constant
 var PLAYER_TYPE = {
 HUMAN: 'Human',

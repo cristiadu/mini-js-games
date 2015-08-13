@@ -28,10 +28,11 @@ Ball.prototype.draw = function (ctx,dt) {
 Ball.prototype.checkCollisionWithVerticalWall = function () {
 
 	// Means scoring a point
-	if(this.X + this.radius <= 0) 	
+	if(this.X + this.radius <= 0)
 		game.scorePoint(POSITION.LEFT);
 	else if(this.X + this.radius >= game.width)
 		game.scorePoint(POSITION.RIGHT);
+	
 
 };
 
@@ -39,7 +40,7 @@ Ball.prototype.checkCollisionWithHorizontalWall = function () {
 
 	// Means changing direction
 
-	if((this.Y + this.radius <= 0) || (this.Y + this.radius >= game.height))
+	if((this.Y - this.radius <= 0) || (this.Y + this.radius >= game.height))
 		this.vY = -this.vY;
 	
 };
