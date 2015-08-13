@@ -31,16 +31,16 @@ Paddle.prototype.checkInput = function ()
 	if(this.playerType == PLAYER_TYPE.HUMAN)
 	{
 		if(Keyboard.isDown(KEYCODES.down))
-			this.Y += VELOCITY_PADDLE;
+			this.Y += SPEED_PADDLE;
 		else if(Keyboard.isDown(KEYCODES.up))
-			this.Y -= VELOCITY_PADDLE;
+			this.Y -= SPEED_PADDLE;
 	}
 	else if(this.playerType == PLAYER_TYPE.HUMAN2)
 	{
 		if(Keyboard.isDown(KEYCODES.w))
-	        this.Y += VELOCITY_PADDLE;
+	        this.Y += SPEED_PADDLE;
 		else if(Keyboard.isDown(KEYCODES.s))
-			this.Y -= VELOCITY_PADDLE;
+			this.Y -= SPEED_PADDLE;
 		
 	}
 
@@ -49,9 +49,9 @@ Paddle.prototype.checkInput = function ()
 Paddle.prototype.moveAI = function () {
 
 	if((this.Y + SIZE_PADDLE/2) > game.ball.Y)
-		this.Y -= VELOCITY_PADDLE;
+		this.Y -= REDUCED_SPEED_AI;
 	else if((this.Y + SIZE_PADDLE/2) < game.ball.Y)
-		this.Y += VELOCITY_PADDLE;
+		this.Y += REDUCED_SPEED_AI;
 
 };
 

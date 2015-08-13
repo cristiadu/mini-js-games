@@ -23,7 +23,8 @@ AI: 'AI'
 var BALL_RADIUS = 5;
 var SIZE_PADDLE = 100;
 var THICKNESS_PADDLE = 10;
-var VELOCITY_PADDLE = 4;
+var SPEED_PADDLE = 4;
+var REDUCED_SPEED_AI = 1;
 
 // 75 degrees
 var MAX_BOUNCE_ANGLE = 5*Math.PI/12;
