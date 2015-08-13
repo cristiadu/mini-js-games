@@ -2,7 +2,7 @@ function PongGame (w,h) {
     this.width = w;
     this.height = h;
     this.player1Paddle = new Paddle(POSITION.LEFT,PLAYER_TYPE.HUMAN);
-    this.player2Paddle = new Paddle(POSITION.RIGHT,PLAYER_TYPE.HUMAN2);
+    this.player2Paddle = new Paddle(POSITION.RIGHT,PLAYER_TYPE.AI);
     this.ball = new Ball();
 }
 
@@ -10,12 +10,14 @@ function PongGame (w,h) {
 PongGame.prototype.update = function () {
 
 	this.ball.update();
-	
-	
 	this.player1Paddle.update();
 	this.player2Paddle.update();
+	
+	var collidePaddle = this.checkCollisionBallwithPaddle();
+	this.ball.checkCollisionWithVerticalWall(collidePaddle);
+	
 
-	this.checkCollisionBallwithPaddle();
+	
 };
 
 PongGame.prototype.draw = function (ctx,dt) {
@@ -35,22 +37,24 @@ PongGame.prototype.draw = function (ctx,dt) {
 PongGame.prototype.checkCollisionBallwithPaddle = function () 
 {
 	var angle = 0;
-	
+	var collides = false;
 
-	if(this.ball.X > this.player1Paddle.X && this.ball.X < this.player1Paddle.X+THICKNESS_PADDLE && this.ball.Y > this.player1Paddle.Y && this.ball.Y < this.player1Paddle.Y+SIZE_PADDLE) 
+	if(((this.ball.X + this.ball.radius) >= this.player2Paddle.X) && (this.player2Paddle.Y <= this.ball.Y) && ((this.player2Paddle.Y + SIZE_PADDLE) >= this.ball.Y))
 	{
 		var bounceAngle = this.player1Paddle.getBounceAngle(this.ball.Y);
 		this.ball.changeDirection(bounceAngle);
+		collides = true;
 				
 	}
-	else if(this.ball.X > this.player2Paddle.X && this.ball.X < this.player2Paddle.X+THICKNESS_PADDLE && this.ball.Y > this.player2Paddle.Y && this.ball.Y < this.player2Paddle.Y+SIZE_PADDLE) 
+	else if(((this.ball.X - this.ball.radius) <= (this.player1Paddle.X + THICKNESS_PADDLE)) && (this.player1Paddle.Y <= this.ball.Y) && ((this.player1Paddle.Y + SIZE_PADDLE) >= this.ball.Y))
 	{
 		var bounceAngle = this.player2Paddle.getBounceAngle(this.ball.Y);
 		this.ball.changeDirection(bounceAngle);
+		collides = true;
 	}
 
 
-	
+	return collides;
 };
 
 PongGame.prototype.scorePoint = function (pos) 

@@ -48,6 +48,10 @@ Paddle.prototype.checkInput = function ()
 
 Paddle.prototype.moveAI = function () {
 
+	if((this.Y + SIZE_PADDLE/2) > game.ball.Y)
+		this.Y -= VELOCITY_PADDLE;
+	else if((this.Y + SIZE_PADDLE/2) < game.ball.Y)
+		this.Y += VELOCITY_PADDLE;
 
 };
 
