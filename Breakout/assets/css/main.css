@@ -1,0 +1,13 @@
+body, html{
+    text-align: center;
+    height: 100%;
+    background-color: #F0F0F0;
+    overflow: hidden;
+}
+
+.gameStage {
+    position: relative;
+    top: 5%;
+    border: px solid black;
+    background-color: #FFF;
+}
