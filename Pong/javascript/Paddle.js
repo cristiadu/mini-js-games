@@ -38,9 +38,9 @@ Paddle.prototype.checkInput = function ()
 	else if(this.playerType == PLAYER_TYPE.HUMAN2)
 	{
 		if(Keyboard.isDown(KEYCODES.w))
-	        this.Y += SPEED_PADDLE;
+	        this.Y -= SPEED_PADDLE;
 		else if(Keyboard.isDown(KEYCODES.s))
-			this.Y -= SPEED_PADDLE;
+			this.Y += SPEED_PADDLE;
 		
 	}
 
