@@ -74,6 +74,7 @@ BreakoutGame.prototype.checkCollisionBallwithBlock = function ()
 			collides = true;
 			this.blocks[i].show = false;
 			game.activeBlocks--;
+			break;
 		}
 	}
 
