@@ -1,14 +1,10 @@
-(function () {
-    window.game = new PongGame(1000,800);
-    var cfg = {
-        width: 1000,
-        height: 800,
-        fps: 60
-    },
-    gameMachine = new GameMachine( game, cfg, '.gameStage' );
+const cfg = {
+    width: 1000,
+    height: 800,
+    fps: 60
+}
 
-    game.init();
-    gameMachine.start();
-
-   
-})();
+const gameMachine = new GameMachine(game, cfg, '.gameStage')
+window.game = new PongGame(1000, 800)
+window.game.init()
+gameMachine.start()
