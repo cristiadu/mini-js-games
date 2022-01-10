@@ -1,6 +1,6 @@
 const KEYCODES = {
-	"left": 37, 
-	"right": 39
+  "left": 37,
+  "right": 39
 }
 
 const BALL_RADIUS = 5;
@@ -12,4 +12,4 @@ const SIZE_BLOCK = 100;
 const NUM_LINES_BLOCKS = 5;
 
 // 75 degrees
-const MAX_BOUNCE_ANGLE = 5*Math.PI/12;
+const MAX_BOUNCE_ANGLE = 5 * Math.PI / 12;

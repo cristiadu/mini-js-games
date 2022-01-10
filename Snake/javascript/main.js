@@ -1,7 +1,7 @@
 const cfg = {
-    width: 800,
-    height: 800,
-    fps: 20
+  width: 800,
+  height: 800,
+  fps: 20
 }
 
 window.game = new SnakeGame(800, 800)

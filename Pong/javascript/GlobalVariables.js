@@ -1,19 +1,19 @@
 const KEYCODES = {
-	"up": 38,
-	"down": 40,
-	"w": 87,
-	"s": 83
+  "up": 38,
+  "down": 40,
+  "w": 87,
+  "s": 83
 }
 
 const POSITION = {
-	LEFT: 'Left',
-	RIGHT: 'Right'
+  LEFT: 'Left',
+  RIGHT: 'Right'
 }
 
 const PLAYER_TYPE = {
-	HUMAN: 'Human',
-	HUMAN2: 'Human2',
-	AI: 'AI'
+  HUMAN: 'Human',
+  HUMAN2: 'Human2',
+  AI: 'AI'
 }
 
 const BALL_RADIUS = 5
