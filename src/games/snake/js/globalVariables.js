@@ -1,15 +1,15 @@
 export const ARROWS_KEYCODES = {
-  "left": 37,
-  "up": 38,
-  "right": 39,
-  "down": 40
+  left: 37,
+  up: 38,
+  right: 39,
+  down: 40,
 }
 
 export const DIRECTION = {
   UP: 'Up',
   DOWN: 'Down',
   LEFT: 'Left',
-  RIGHT: 'Right'
+  RIGHT: 'Right',
 }
 
 export const TIMEOUT_FOOD = 3000

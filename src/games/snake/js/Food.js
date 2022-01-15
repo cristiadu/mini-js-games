@@ -21,9 +21,10 @@ export default class Food {
   }
 
   generateFood() {
-    var randomX, randomY
-    var inSnake = true
-    var part = game.snake
+    let randomX; let
+      randomY
+    let inSnake = true
+    let part = game.snake
 
     while (inSnake) {
       randomX = getRandomInt(0, game.width)

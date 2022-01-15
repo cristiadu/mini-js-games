@@ -1,5 +1,7 @@
 import Keyboard from '../../../common/Keyboard.js'
-import { KEYCODES, MAX_BOUNCE_ANGLE, SIZE_PADDLE, SPEED_PADDLE, THICKNESS_PADDLE } from './globalVariables.js'
+import {
+  KEYCODES, MAX_BOUNCE_ANGLE, SIZE_PADDLE, SPEED_PADDLE, THICKNESS_PADDLE,
+} from './globalVariables.js'
 
 export default class Paddle {
   constructor() {
@@ -28,7 +30,7 @@ export default class Paddle {
   // Used to calculate the angles
   getBounceAngle(intersectX) {
     // Y position relative to paddle height.
-    var relativeIntersection = this.X + (SIZE_PADDLE / 2) - intersectX
+    const relativeIntersection = this.X + (SIZE_PADDLE / 2) - intersectX
     return (relativeIntersection / (SIZE_PADDLE / 2)) * MAX_BOUNCE_ANGLE
   }
 

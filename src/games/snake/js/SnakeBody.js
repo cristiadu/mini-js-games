@@ -17,19 +17,19 @@ export default class SnakeBody {
 
     switch (this.direction) {
       case DIRECTION.RIGHT:
-        this.X = this.X + SIZE_SNAKE
+        this.X += SIZE_SNAKE
         break
       case DIRECTION.LEFT:
-        this.X = this.X - SIZE_SNAKE
+        this.X -= SIZE_SNAKE
         break
       case DIRECTION.UP:
-        this.Y = this.Y - SIZE_SNAKE
+        this.Y -= SIZE_SNAKE
         break
       case DIRECTION.DOWN:
-        this.Y = this.Y + SIZE_SNAKE
+        this.Y += SIZE_SNAKE
         break
       default:
-        this.X = this.X + SIZE_SNAKE
+        this.X += SIZE_SNAKE
         break
     }
 

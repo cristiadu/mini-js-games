@@ -45,9 +45,9 @@ export default class Ball {
     // It hit a paddle, so increase speed.
     if (this.vY < 0) {
       this.vY = -(this.vY + (-1.00) * Math.abs(Math.cos(bounceAngle)))
-      this.vX = (this.vX + (1.00) * (-Math.sin(bounceAngle)))
+      this.vX += (1.00) * (-Math.sin(bounceAngle))
     } else {
-      this.vX = (this.vX + (1.00) * (-Math.sin(bounceAngle)))
+      this.vX += (1.00) * (-Math.sin(bounceAngle))
       this.vY = -(this.vY + (1.00) * Math.abs(Math.cos(bounceAngle)))
     }
   }

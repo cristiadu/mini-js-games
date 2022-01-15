@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "format-code": "./node_modules/.bin/eslint \"./src/**\" --fix --ignore-path ./.eslintignore",
+    "check-code": "./node_modules/.bin/eslint \"./src/**\" --ignore-path ./.eslintignore"
   },
   "repository": {
     "type": "git",
@@ -23,5 +25,13 @@
   "homepage": "https://github.com/cristiadu/mini-js-games#readme",
   "dependencies": {
     "express": "^4.17.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.6.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.4"
+  },
+  "engines": {
+    "node": "16.x"
   }
 }
