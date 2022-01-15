@@ -37,7 +37,5 @@ export default class Keyboard {
   }
 }
 
-if (window.GameKeyboard == null) {
-  window.GameKeyboard = new Keyboard()
-}
+window.GameKeyboard = new Keyboard()
 window.GameKeyboard.start()
