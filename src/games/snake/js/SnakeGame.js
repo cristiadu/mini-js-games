@@ -13,7 +13,7 @@ export default class SnakeGame {
   }
 
   update() {
-    this.checkInput();
+    this.checkInput()
     if (!this.gameOver) {
       this.food.update()
       this.snake.update()
@@ -27,12 +27,12 @@ export default class SnakeGame {
     this.snake.draw(ctx, dt)
 
     if (this.gameOver) {
-      ctx.fillText("Game Over, press ESC if you want to restart.", 25, 25)
+      ctx.fillText('Game Over, press ESC if you want to restart.', 25, 25)
     }
   }
 
   checkInput() {
-    var direction = null;
+    let direction = null
     if (!this.gameOver) {
       if (Keyboard.isDown(ARROWS_KEYCODES.left) && (this.snake.direction != DIRECTION.RIGHT)) {
         direction = DIRECTION.LEFT
@@ -47,12 +47,10 @@ export default class SnakeGame {
       if (direction != null) {
         this.snake.changeDirection(direction)
       }
-    }
-    else if (Keyboard.isDown(27)) {
+    } else if (Keyboard.isDown(27)) {
       // ESC key was pressed, reset game.
       this.init()
     }
-
   }
 
   init() {

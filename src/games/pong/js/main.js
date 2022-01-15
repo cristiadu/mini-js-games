@@ -4,7 +4,7 @@ import PongGame from './PongGame.js'
 const cfg = {
   width: 1000,
   height: 800,
-  fps: 60
+  fps: 60,
 }
 
 window.game = new PongGame(1000, 800)

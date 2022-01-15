@@ -2,7 +2,7 @@ import { BALL_RADIUS, POSITION } from './globalVariables.js'
 
 export default class Ball {
   constructor() {
-    this.radius = BALL_RADIUS;
+    this.radius = BALL_RADIUS
     this.X = 0
     this.Y = 0
     this.vX = 3
@@ -44,9 +44,9 @@ export default class Ball {
     // It hit a paddle, so increase speed.
     if (this.vX < 0) {
       this.vX = -(this.vX + (-1.00) * Math.abs(Math.cos(bounceAngle)))
-      this.vY = (this.vY + (1.00) * (-Math.sin(bounceAngle)))
+      this.vY += (1.00) * (-Math.sin(bounceAngle))
     } else {
-      this.vY = (this.vY + (1.00) * (-Math.sin(bounceAngle)))
+      this.vY += (1.00) * (-Math.sin(bounceAngle))
       this.vX = -(this.vX + (1.00) * Math.abs(Math.cos(bounceAngle)))
     }
   }

@@ -1,7 +1,7 @@
 const STATES = {
   PLAYING: 0,
   STOPPED: 1,
-  PAUSED: 2
+  PAUSED: 2,
 }
 
 export default class GameMachine {
@@ -42,7 +42,7 @@ export default class GameMachine {
       if (this.state === STATES.PLAYING) {
         requestAnimationFrame(this.step, this.gameCanvas)
       }
-    };
+    }
   }
 
   start = () => {

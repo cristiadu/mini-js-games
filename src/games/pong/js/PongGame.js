@@ -1,6 +1,8 @@
 import Ball from './Ball.js'
 import Paddle from './Paddle.js'
-import { PLAYER_TYPE, POSITION, SIZE_PADDLE, THICKNESS_PADDLE } from './globalVariables.js'
+import {
+  PLAYER_TYPE, POSITION, SIZE_PADDLE, THICKNESS_PADDLE,
+} from './globalVariables.js'
 
 export default class PongGame {
   constructor(w, h) {
@@ -15,7 +17,7 @@ export default class PongGame {
     this.ball.update()
     this.player1Paddle.update()
     this.player2Paddle.update()
-    var collidePaddle = this.checkCollisionBallwithPaddle()
+    const collidePaddle = this.checkCollisionBallwithPaddle()
     this.ball.checkCollisionWithVerticalWall(collidePaddle)
   }
 
@@ -28,13 +30,13 @@ export default class PongGame {
     this.player2Paddle.draw(ctx, dt)
 
     ctx.fillStyle = '#fff'
-    ctx.font = "48px Monospace"
-    ctx.fillText(this.player1Paddle.points + " X " + this.player2Paddle.points, (game.width - 100) / 2, 50)
+    ctx.font = '48px Monospace'
+    ctx.fillText(`${this.player1Paddle.points} X ${this.player2Paddle.points}`, (game.width - 100) / 2, 50)
   }
 
   checkCollisionBallwithPaddle() {
-    var angle = 0
-    var collides = false
+    const angle = 0
+    let collides = false
 
     if (((this.ball.X + this.ball.radius) >= this.player2Paddle.X) && (this.player2Paddle.Y <= this.ball.Y) && ((this.player2Paddle.Y + SIZE_PADDLE) >= this.ball.Y)) {
       var bounceAngle = this.player1Paddle.getBounceAngle(this.ball.Y)

@@ -1,19 +1,19 @@
 export const KEYCODES = {
-  "up": 38,
-  "down": 40,
-  "w": 87,
-  "s": 83
+  up: 38,
+  down: 40,
+  w: 87,
+  s: 83,
 }
 
 export const POSITION = {
   LEFT: 'Left',
-  RIGHT: 'Right'
+  RIGHT: 'Right',
 }
 
 export const PLAYER_TYPE = {
   HUMAN: 'Human',
   HUMAN2: 'Human2',
-  AI: 'AI'
+  AI: 'AI',
 }
 
 export const BALL_RADIUS = 5

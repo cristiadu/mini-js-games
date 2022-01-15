@@ -1,5 +1,7 @@
 import Keyboard from '../../../common/Keyboard.js'
-import { KEYCODES, MAX_BOUNCE_ANGLE, PLAYER_TYPE, POSITION, REDUCED_SPEED_AI, SIZE_PADDLE, SPEED_PADDLE, THICKNESS_PADDLE } from './globalVariables.js'
+import {
+  KEYCODES, MAX_BOUNCE_ANGLE, PLAYER_TYPE, POSITION, REDUCED_SPEED_AI, SIZE_PADDLE, SPEED_PADDLE, THICKNESS_PADDLE,
+} from './globalVariables.js'
 
 export default class Paddle {
   constructor(pos, pType) {
@@ -32,14 +34,12 @@ export default class Paddle {
       } else if (Keyboard.isDown(KEYCODES.up)) {
         this.Y -= SPEED_PADDLE
       }
-
     } else if (this.playerType == PLAYER_TYPE.HUMAN2) {
       if (Keyboard.isDown(KEYCODES.w)) {
         this.Y -= SPEED_PADDLE
       } else if (Keyboard.isDown(KEYCODES.s)) {
         this.Y += SPEED_PADDLE
       }
-
     }
   }
 
@@ -53,7 +53,7 @@ export default class Paddle {
 
   // Used to calculate the angles
   getBounceAngle(intersectY) {
-    var relativeIntersection = this.Y + (SIZE_PADDLE / 2) - intersectY
+    const relativeIntersection = this.Y + (SIZE_PADDLE / 2) - intersectY
     return (relativeIntersection / (SIZE_PADDLE / 2)) * MAX_BOUNCE_ANGLE
   }
 
