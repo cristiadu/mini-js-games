@@ -10,12 +10,12 @@ export default class GameMachine {
     this.game.machine = this
     this.gameCanvas = document.querySelector(selector)
     this.context = this.gameCanvas.getContext('2d')
-    this.now
-    this.ellapsed
-    this.last
+    this.now = 0
+    this.ellapsed = 0
+    this.last = new Date().getTime()
     this.fps = cfg.fps || 60
     this.dStep = 1000 / this.fps
-    this.accumulator
+    this.accumulator = 0
     this.state = STATES.STOPPED
 
     this.width = cfg.width
@@ -24,8 +24,6 @@ export default class GameMachine {
     this.gameCanvas.width = cfg.width
     this.gameCanvas.height = cfg.height
 
-    this.last = new Date().getTime()
-    this.accumulator = 0
     this.state = STATES.PLAYING
     this.step = () => {
       this.now = new Date().getTime()

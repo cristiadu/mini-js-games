@@ -1,8 +1,3 @@
-const EVENTS = {
-  keyup: 'keyup',
-  keydown: 'keydown',
-}
-
 export default class Keyboard {
   static mappedKeys = {}
 

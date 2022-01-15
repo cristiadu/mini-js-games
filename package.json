@@ -6,8 +6,8 @@
   "scripts": {
     "start": "node .",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "format-code": "./node_modules/.bin/eslint \"./src/**\" --fix",
-    "check-code": "./node_modules/.bin/eslint \"./src/**\""
+    "format-code": "./node_modules/.bin/eslint \"./src/**\" --fix --ignore-path ./.eslintignore",
+    "check-code": "./node_modules/.bin/eslint \"./src/**\" --ignore-path ./.eslintignore"
   },
   "repository": {
     "type": "git",
