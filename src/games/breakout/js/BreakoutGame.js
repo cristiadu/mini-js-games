@@ -34,9 +34,9 @@ export default class BreakoutGame {
     this.ball.draw(ctx)
     this.playerPaddle.draw(ctx)
 
-    for (const i in this.blocks) {
-      this.blocks[i].draw(ctx)
-    }
+    Object.keys(this.blocks).forEach((block) => {
+      block.draw(ctx)
+    })
 
     if (this.activeBlocks <= 0) {
       ctx.fillText('You won!', 25, 25)
@@ -61,18 +61,19 @@ export default class BreakoutGame {
 
   checkCollisionBallwithBlock() {
     let collides = false
-    for (const i in this.blocks) {
-      if (this.blocks[i].show
-        && (((this.ball.Y - this.ball.radius) <= this.blocks[i].Y + THICKNESS_BLOCK)
-              && ((this.ball.Y - this.ball.radius) >= (this.blocks[i].Y)))
-        && ((((this.ball.X - this.ball.radius) <= (this.blocks[i].X + SIZE_BLOCK))
-              && ((this.ball.X - this.ball.radius) >= this.blocks[i].X))
-          || (((this.ball.X + this.ball.radius) >= (this.blocks[i].X))
-              && ((this.ball.X + this.ball.radius) <= (this.blocks[i].X + SIZE_BLOCK))))) {
-        const bounceAngle = this.blocks[i].getBounceAngle(this.ball.X)
+
+    for (const block of this.blocks) {
+      if (block.show
+        && (((this.ball.Y - this.ball.radius) <= block.Y + THICKNESS_BLOCK)
+          && ((this.ball.Y - this.ball.radius) >= (block.Y)))
+        && ((((this.ball.X - this.ball.radius) <= (block.X + SIZE_BLOCK))
+          && ((this.ball.X - this.ball.radius) >= block.X))
+          || (((this.ball.X + this.ball.radius) >= (block.X))
+            && ((this.ball.X + this.ball.radius) <= (block.X + SIZE_BLOCK))))) {
+        const bounceAngle = block.getBounceAngle(this.ball.X)
         this.ball.changeDirection(bounceAngle)
         collides = true
-        this.blocks[i].show = false
+        block.show = false
         window.game.activeBlocks -= 1
         break
       }
