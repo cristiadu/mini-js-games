@@ -20,27 +20,29 @@ export default class SnakeGame {
     }
   }
 
+  /* eslint-disable no-unused-vars */
   draw(ctx, dt) {
     ctx.fillStyle = '#000'
     ctx.fillRect(0, 0, this.width, this.height)
-    this.food.draw(ctx, dt)
-    this.snake.draw(ctx, dt)
+    this.food.draw(ctx)
+    this.snake.draw(ctx)
 
     if (this.gameOver) {
       ctx.fillText('Game Over, press ESC if you want to restart.', 25, 25)
     }
   }
+  /* eslint-enable no-unused-vars */
 
   checkInput() {
     let direction = null
     if (!this.gameOver) {
-      if (Keyboard.isDown(ARROWS_KEYCODES.left) && (this.snake.direction != DIRECTION.RIGHT)) {
+      if (Keyboard.isDown(ARROWS_KEYCODES.left) && (this.snake.direction !== DIRECTION.RIGHT)) {
         direction = DIRECTION.LEFT
-      } else if (Keyboard.isDown(ARROWS_KEYCODES.right) && (this.snake.direction != DIRECTION.LEFT)) {
+      } else if (Keyboard.isDown(ARROWS_KEYCODES.right) && (this.snake.direction !== DIRECTION.LEFT)) {
         direction = DIRECTION.RIGHT
-      } else if (Keyboard.isDown(ARROWS_KEYCODES.down) && (this.snake.direction != DIRECTION.UP)) {
+      } else if (Keyboard.isDown(ARROWS_KEYCODES.down) && (this.snake.direction !== DIRECTION.UP)) {
         direction = DIRECTION.DOWN
-      } else if (Keyboard.isDown(ARROWS_KEYCODES.up) && (this.snake.direction != DIRECTION.DOWN)) {
+      } else if (Keyboard.isDown(ARROWS_KEYCODES.up) && (this.snake.direction !== DIRECTION.DOWN)) {
         direction = DIRECTION.UP
       }
 

@@ -1,4 +1,4 @@
-import { getRandomInt } from './utils.js'
+import getRandomInt from './utils.js'
 import { FOOD_SIZE, SIZE_SNAKE, TIMEOUT_FOOD } from './globalVariables.js'
 
 export default class Food {
@@ -9,13 +9,13 @@ export default class Food {
   }
 
   update() {
-    this.elapsedTime++
+    this.elapsedTime += 1
     if (this.elapsedTime >= TIMEOUT_FOOD) {
       this.generateFood()
     }
   }
 
-  draw(ctx, dt) {
+  draw(ctx) {
     ctx.fillStyle = '#FF0000'
     ctx.fillRect(this.X, this.Y, FOOD_SIZE, FOOD_SIZE)
   }
@@ -24,19 +24,22 @@ export default class Food {
     let randomX; let
       randomY
     let inSnake = true
-    let part = game.snake
+    let part = window.game.snake
 
     while (inSnake) {
-      randomX = getRandomInt(0, game.width)
-      randomY = getRandomInt(0, game.height)
+      randomX = getRandomInt(0, window.game.width)
+      randomY = getRandomInt(0, window.game.height)
       if (part.X < randomX + FOOD_SIZE && part.X + SIZE_SNAKE > randomX && part.Y < randomY + FOOD_SIZE && SIZE_SNAKE + part.Y > randomY) {
+        /* eslint-disable no-continue */
         continue
+        /* eslint-enable no-continue */
       } else {
         part = part.body
       }
 
       while (part != null) {
-        if (part.X < randomX + FOOD_SIZE && part.X + SIZE_SNAKE > randomX && part.Y < randomY + FOOD_SIZE && SIZE_SNAKE + part.Y > randomY) {
+        if (part.X < randomX + FOOD_SIZE && part.X + SIZE_SNAKE > randomX && part.Y < randomY + FOOD_SIZE
+          && SIZE_SNAKE + part.Y > randomY) {
           break
         } else {
           part = part.next

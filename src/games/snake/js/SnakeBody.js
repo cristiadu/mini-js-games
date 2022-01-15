@@ -38,11 +38,11 @@ export default class SnakeBody {
     }
   }
 
-  draw(ctx, dt) {
+  draw(ctx) {
     ctx.fillStyle = '#00FF00'
     ctx.fillRect(this.X, this.Y, SIZE_SNAKE, SIZE_SNAKE)
     if (this.next != null) {
-      this.next.draw(ctx, dt)
+      this.next.draw(ctx)
     }
   }
 

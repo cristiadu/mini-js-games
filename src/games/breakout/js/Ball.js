@@ -15,7 +15,7 @@ export default class Ball {
     this.checkCollisionWithVerticalWall()
   }
 
-  draw(ctx, dt) {
+  draw(ctx) {
     ctx.fillStyle = '#fff'
     ctx.beginPath()
     ctx.arc(this.X, this.Y, this.radius, 0, 2 * Math.PI)
@@ -27,16 +27,16 @@ export default class Ball {
     if (!collide) {
       if (this.Y - this.radius <= 0) {
         this.vY = -this.vY
-      } else if (this.Y + this.radius >= game.height) {
+      } else if (this.Y + this.radius >= window.game.height) {
         this.init()
-        game.lives--
+        window.game.lives -= 1
       }
     }
   }
 
   checkCollisionWithVerticalWall() {
     // Means changing direction
-    if (((this.X - this.radius) <= 0) || ((this.X + this.radius) >= game.width)) {
+    if (((this.X - this.radius) <= 0) || ((this.X + this.radius) >= window.game.width)) {
       this.vX = -this.vX
     }
   }
@@ -53,8 +53,8 @@ export default class Ball {
   }
 
   init() {
-    this.X = game.width / 2
-    this.Y = game.height / 2
+    this.X = window.game.width / 2
+    this.Y = window.game.height / 2
     this.vX = 0
     this.vY = 3
   }

@@ -12,4 +12,4 @@ export const SIZE_BLOCK = 100
 export const NUM_LINES_BLOCKS = 5
 
 // 75 degrees
-export const MAX_BOUNCE_ANGLE = 5 * Math.PI / 12
+export const MAX_BOUNCE_ANGLE = (5 * Math.PI) / 12

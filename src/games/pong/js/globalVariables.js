@@ -23,4 +23,4 @@ export const SPEED_PADDLE = 4
 export const REDUCED_SPEED_AI = 1
 
 // 75 degrees
-export const MAX_BOUNCE_ANGLE = 5 * Math.PI / 12
+export const MAX_BOUNCE_ANGLE = (5 * Math.PI) / 12
