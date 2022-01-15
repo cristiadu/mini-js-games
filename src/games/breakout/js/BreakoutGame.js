@@ -34,7 +34,7 @@ export default class BreakoutGame {
     this.ball.draw(ctx)
     this.playerPaddle.draw(ctx)
 
-    Object.keys(this.blocks).forEach((block) => {
+    Object.values(this.blocks).forEach((block) => {
       block.draw(ctx)
     })
 
