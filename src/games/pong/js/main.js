@@ -8,6 +8,6 @@ const cfg = {
 }
 
 window.game = new PongGame(1000, 800)
-const gameMachine = new GameMachine(game, cfg, '.gameStage')
+const gameMachine = new GameMachine(window.game, cfg, '.gameStage')
 window.game.init()
 gameMachine.start()

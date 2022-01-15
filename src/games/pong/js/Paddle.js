@@ -13,7 +13,7 @@ export default class Paddle {
   }
 
   update() {
-    if (this.playerType == PLAYER_TYPE.AI) {
+    if (this.playerType === PLAYER_TYPE.AI) {
       this.moveAI()
     } else {
       this.checkInput()
@@ -22,19 +22,19 @@ export default class Paddle {
     this.checkCollisionWithWall()
   }
 
-  draw(ctx, dt) {
+  draw(ctx) {
     ctx.fillStyle = '#fff'
     ctx.fillRect(this.X, this.Y, THICKNESS_PADDLE, SIZE_PADDLE)
   }
 
   checkInput() {
-    if (this.playerType == PLAYER_TYPE.HUMAN) {
+    if (this.playerType === PLAYER_TYPE.HUMAN) {
       if (Keyboard.isDown(KEYCODES.down)) {
         this.Y += SPEED_PADDLE
       } else if (Keyboard.isDown(KEYCODES.up)) {
         this.Y -= SPEED_PADDLE
       }
-    } else if (this.playerType == PLAYER_TYPE.HUMAN2) {
+    } else if (this.playerType === PLAYER_TYPE.HUMAN2) {
       if (Keyboard.isDown(KEYCODES.w)) {
         this.Y -= SPEED_PADDLE
       } else if (Keyboard.isDown(KEYCODES.s)) {
@@ -44,9 +44,9 @@ export default class Paddle {
   }
 
   moveAI() {
-    if ((this.Y + SIZE_PADDLE / 2) > game.ball.Y) {
+    if ((this.Y + SIZE_PADDLE / 2) > window.game.ball.Y) {
       this.Y -= REDUCED_SPEED_AI
-    } else if ((this.Y + SIZE_PADDLE / 2) < game.ball.Y) {
+    } else if ((this.Y + SIZE_PADDLE / 2) < window.game.ball.Y) {
       this.Y += REDUCED_SPEED_AI
     }
   }
@@ -60,18 +60,18 @@ export default class Paddle {
   checkCollisionWithWall() {
     if (this.Y <= 0) {
       this.Y = 0
-    } else if (this.Y + SIZE_PADDLE >= game.height) {
-      this.Y = game.height - SIZE_PADDLE
+    } else if (this.Y + SIZE_PADDLE >= window.game.height) {
+      this.Y = window.game.height - SIZE_PADDLE
     }
   }
 
   init() {
-    if (this.position == POSITION.RIGHT) {
-      this.X = game.width - THICKNESS_PADDLE
-      this.Y = game.height / 2
-    } else if (this.position == POSITION.LEFT) {
+    if (this.position === POSITION.RIGHT) {
+      this.X = window.game.width - THICKNESS_PADDLE
+      this.Y = window.game.height / 2
+    } else if (this.position === POSITION.LEFT) {
       this.X = 0
-      this.Y = game.height / 2
+      this.Y = window.game.height / 2
     }
 
     this.points = 0

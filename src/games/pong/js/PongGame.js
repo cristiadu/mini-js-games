@@ -21,29 +21,32 @@ export default class PongGame {
     this.ball.checkCollisionWithVerticalWall(collidePaddle)
   }
 
+  /* eslint-disable no-unused-vars */
   draw(ctx, dt) {
     ctx.fillStyle = '#000'
     ctx.fillRect(0, 0, this.width, this.height)
 
-    this.ball.draw(ctx, dt)
-    this.player1Paddle.draw(ctx, dt)
-    this.player2Paddle.draw(ctx, dt)
+    this.ball.draw(ctx)
+    this.player1Paddle.draw(ctx)
+    this.player2Paddle.draw(ctx)
 
     ctx.fillStyle = '#fff'
     ctx.font = '48px Monospace'
-    ctx.fillText(`${this.player1Paddle.points} X ${this.player2Paddle.points}`, (game.width - 100) / 2, 50)
+    ctx.fillText(`${this.player1Paddle.points} X ${this.player2Paddle.points}`, (window.game.width - 100) / 2, 50)
   }
+  /* eslint-enable no-unused-vars */
 
   checkCollisionBallwithPaddle() {
-    const angle = 0
     let collides = false
 
-    if (((this.ball.X + this.ball.radius) >= this.player2Paddle.X) && (this.player2Paddle.Y <= this.ball.Y) && ((this.player2Paddle.Y + SIZE_PADDLE) >= this.ball.Y)) {
-      var bounceAngle = this.player1Paddle.getBounceAngle(this.ball.Y)
+    if (((this.ball.X + this.ball.radius) >= this.player2Paddle.X) && (this.player2Paddle.Y <= this.ball.Y)
+      && ((this.player2Paddle.Y + SIZE_PADDLE) >= this.ball.Y)) {
+      const bounceAngle = this.player1Paddle.getBounceAngle(this.ball.Y)
       this.ball.changeDirection(bounceAngle)
       collides = true
-    } else if (((this.ball.X - this.ball.radius) <= (this.player1Paddle.X + THICKNESS_PADDLE)) && (this.player1Paddle.Y <= this.ball.Y) && ((this.player1Paddle.Y + SIZE_PADDLE) >= this.ball.Y)) {
-      var bounceAngle = this.player2Paddle.getBounceAngle(this.ball.Y)
+    } else if (((this.ball.X - this.ball.radius) <= (this.player1Paddle.X + THICKNESS_PADDLE))
+      && (this.player1Paddle.Y <= this.ball.Y) && ((this.player1Paddle.Y + SIZE_PADDLE) >= this.ball.Y)) {
+      const bounceAngle = this.player2Paddle.getBounceAngle(this.ball.Y)
       this.ball.changeDirection(bounceAngle)
       collides = true
     }
@@ -52,10 +55,10 @@ export default class PongGame {
   }
 
   scorePoint(pos) {
-    if (pos == POSITION.LEFT) {
-      this.player2Paddle.points++
-    } else if (pos == POSITION.RIGHT) {
-      this.player1Paddle.points++
+    if (pos === POSITION.LEFT) {
+      this.player2Paddle.points += 1
+    } else if (pos === POSITION.RIGHT) {
+      this.player1Paddle.points += 1
     }
 
     this.ball.init()

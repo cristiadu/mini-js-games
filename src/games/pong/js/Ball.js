@@ -15,7 +15,7 @@ export default class Ball {
     this.checkCollisionWithHorizontalWall()
   }
 
-  draw(ctx, dt) {
+  draw(ctx) {
     ctx.fillStyle = '#fff'
     ctx.beginPath()
     ctx.arc(this.X, this.Y, this.radius, 0, 2 * Math.PI)
@@ -26,16 +26,16 @@ export default class Ball {
     // Means scoring a point
     if (!collidePaddle) {
       if (this.X - this.radius <= 0) {
-        game.scorePoint(POSITION.LEFT)
-      } else if (this.X + this.radius >= game.width) {
-        game.scorePoint(POSITION.RIGHT)
+        window.game.scorePoint(POSITION.LEFT)
+      } else if (this.X + this.radius >= window.game.width) {
+        window.game.scorePoint(POSITION.RIGHT)
       }
     }
   }
 
   checkCollisionWithHorizontalWall() {
     // Means changing direction
-    if (((this.Y - this.radius) <= 0) || ((this.Y + this.radius) >= game.height)) {
+    if (((this.Y - this.radius) <= 0) || ((this.Y + this.radius) >= window.game.height)) {
       this.vY = -this.vY
     }
   }
@@ -52,8 +52,8 @@ export default class Ball {
   }
 
   init() {
-    this.X = game.width / 2
-    this.Y = game.height / 2
+    this.X = window.game.width / 2
+    this.Y = window.game.height / 2
     this.vX = 3
     this.vY = 0
   }

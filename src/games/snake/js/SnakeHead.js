@@ -31,7 +31,7 @@ export default class SnakeHead {
 
     if (this.isEatingFood()) {
       this.body.increase()
-      game.food.generateFood()
+      window.game.food.generateFood()
     }
 
     this.body.update()
@@ -40,10 +40,10 @@ export default class SnakeHead {
     this.checkWallCollision()
   }
 
-  draw(ctx, dt) {
+  draw(ctx) {
     ctx.fillStyle = '#00AA00'
     ctx.fillRect(this.X, this.Y, SIZE_SNAKE, SIZE_SNAKE)
-    this.body.draw(ctx, dt)
+    this.body.draw(ctx)
   }
 
   init() {
@@ -61,7 +61,7 @@ export default class SnakeHead {
     let part = this.body
     while (part != null) {
       if (this.X < part.X + SIZE_SNAKE && this.X + SIZE_SNAKE > part.X && this.Y < part.Y + SIZE_SNAKE && SIZE_SNAKE + this.Y > part.Y) {
-        game.gameIsOver()
+        window.game.gameIsOver()
         break
       }
       part = part.next
@@ -69,8 +69,8 @@ export default class SnakeHead {
   }
 
   checkWallCollision() {
-    if ((this.X < 0) || (this.Y < 0) || ((this.X + SIZE_SNAKE) > game.width) || ((this.Y + SIZE_SNAKE) > game.height)) {
-      game.gameIsOver()
+    if ((this.X < 0) || (this.Y < 0) || ((this.X + SIZE_SNAKE) > window.game.width) || ((this.Y + SIZE_SNAKE) > window.game.height)) {
+      window.game.gameIsOver()
     }
   }
 
@@ -80,7 +80,8 @@ export default class SnakeHead {
   }
 
   isEatingFood() {
-    if (this.X < game.food.X + FOOD_SIZE && this.X + SIZE_SNAKE > game.food.X && this.Y < game.food.Y + FOOD_SIZE && SIZE_SNAKE + this.Y > game.food.Y) {
+    if (this.X < window.game.food.X + FOOD_SIZE && this.X + SIZE_SNAKE > window.game.food.X
+      && this.Y < window.game.food.Y + FOOD_SIZE && SIZE_SNAKE + this.Y > window.game.food.Y) {
       return true
     }
 

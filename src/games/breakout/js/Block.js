@@ -1,7 +1,7 @@
 import {
   MAX_BOUNCE_ANGLE, SIZE_BLOCK, SIZE_PADDLE, THICKNESS_BLOCK,
 } from './globalVariables.js'
-import { getRndColor } from './utils.js'
+import getRndColor from './utils.js'
 
 export default class Block {
   constructor() {
@@ -11,8 +11,8 @@ export default class Block {
     this.show = true
   }
 
-  draw(ctx, dt) {
-    if (this.show == true) {
+  draw(ctx) {
+    if (this.show === true) {
       ctx.fillStyle = (this.color) ? this.color : 'green'
       ctx.fillRect(this.X, this.Y, SIZE_BLOCK, THICKNESS_BLOCK)
       ctx.strokeStyle = 'white'

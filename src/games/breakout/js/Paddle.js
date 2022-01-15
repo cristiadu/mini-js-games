@@ -14,7 +14,7 @@ export default class Paddle {
     this.checkCollisionWithWall()
   }
 
-  draw(ctx, dt) {
+  draw(ctx) {
     ctx.fillStyle = '#fff'
     ctx.fillRect(this.X, this.Y, SIZE_PADDLE, THICKNESS_PADDLE)
   }
@@ -37,13 +37,13 @@ export default class Paddle {
   checkCollisionWithWall() {
     if (this.X <= 0) {
       this.X = 0
-    } else if (this.X + SIZE_PADDLE >= game.width) {
-      this.X = game.width - SIZE_PADDLE
+    } else if (this.X + SIZE_PADDLE >= window.game.width) {
+      this.X = window.game.width - SIZE_PADDLE
     }
   }
 
   init() {
-    this.X = game.width / 2
-    this.Y = game.height - THICKNESS_PADDLE - 10
+    this.X = window.game.width / 2
+    this.Y = window.game.height - THICKNESS_PADDLE - 10
   }
 }
