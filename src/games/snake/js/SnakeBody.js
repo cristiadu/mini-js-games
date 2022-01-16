@@ -1,4 +1,4 @@
-import { DIRECTION, SIZE_SNAKE } from './globalVariables.js'
+import { DIRECTION, SIZE_SNAKE, SNAKE_BODY_COLOR } from './globalVariables.js'
 
 export default class SnakeBody {
   constructor(initialX, initialY, previous) {
@@ -39,7 +39,7 @@ export default class SnakeBody {
   }
 
   draw(ctx) {
-    ctx.fillStyle = '#00FF00'
+    ctx.fillStyle = SNAKE_BODY_COLOR
     ctx.fillRect(this.X, this.Y, SIZE_SNAKE, SIZE_SNAKE)
     if (this.next != null) {
       this.next.draw(ctx)

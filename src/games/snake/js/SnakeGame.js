@@ -1,7 +1,7 @@
 import Keyboard from '../../../common/Keyboard.js'
 import Food from './Food.js'
 import SnakeHead from './SnakeHead.js'
-import { ARROWS_KEYCODES, DIRECTION } from './globalVariables.js'
+import { ARROWS_KEYCODES, DIRECTION, SCREEN_BACKGROUND_COLOR } from './globalVariables.js'
 
 export default class SnakeGame {
   constructor(w, h) {
@@ -22,7 +22,7 @@ export default class SnakeGame {
 
   /* eslint-disable no-unused-vars */
   draw(ctx, dt) {
-    ctx.fillStyle = '#000'
+    ctx.fillStyle = SCREEN_BACKGROUND_COLOR
     ctx.fillRect(0, 0, this.width, this.height)
     this.food.draw(ctx)
     this.snake.draw(ctx)

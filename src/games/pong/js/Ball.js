@@ -1,11 +1,13 @@
-import { BALL_RADIUS, POSITION } from './globalVariables.js'
+import {
+  BALL_COLOR, BALL_INITIAL_SPEED, BALL_RADIUS, POSITION,
+} from './globalVariables.js'
 
 export default class Ball {
   constructor() {
     this.radius = BALL_RADIUS
     this.X = 0
     this.Y = 0
-    this.vX = 3
+    this.vX = BALL_INITIAL_SPEED
     this.vY = 0
   }
 
@@ -16,7 +18,7 @@ export default class Ball {
   }
 
   draw(ctx) {
-    ctx.fillStyle = '#fff'
+    ctx.fillStyle = BALL_COLOR
     ctx.beginPath()
     ctx.arc(this.X, this.Y, this.radius, 0, 2 * Math.PI)
     ctx.fill()
@@ -51,10 +53,10 @@ export default class Ball {
     }
   }
 
-  init() {
-    this.X = window.game.width / 2
-    this.Y = window.game.height / 2
-    this.vX = 3
+  init(initialX, initialY) {
+    this.X = initialX
+    this.Y = initialY
+    this.vX = BALL_INITIAL_SPEED
     this.vY = 0
   }
 }

@@ -1,7 +1,7 @@
 import Ball from './Ball.js'
 import Paddle from './Paddle.js'
 import {
-  PLAYER_TYPE, POSITION, SIZE_PADDLE, THICKNESS_PADDLE,
+  PLAYER_TYPE, POSITION, SCREEN_BACKGROUND_COLOR, SIZE_PADDLE, TEXT_COLOR, THICKNESS_PADDLE,
 } from './globalVariables.js'
 
 export default class PongGame {
@@ -23,14 +23,14 @@ export default class PongGame {
 
   /* eslint-disable no-unused-vars */
   draw(ctx, dt) {
-    ctx.fillStyle = '#000'
+    ctx.fillStyle = SCREEN_BACKGROUND_COLOR
     ctx.fillRect(0, 0, this.width, this.height)
 
     this.ball.draw(ctx)
     this.player1Paddle.draw(ctx)
     this.player2Paddle.draw(ctx)
 
-    ctx.fillStyle = '#fff'
+    ctx.fillStyle = TEXT_COLOR
     ctx.font = '48px Monospace'
     ctx.fillText(`${this.player1Paddle.points} X ${this.player2Paddle.points}`, (window.game.width - 100) / 2, 50)
   }
@@ -61,12 +61,12 @@ export default class PongGame {
       this.player1Paddle.points += 1
     }
 
-    this.ball.init()
+    this.ball.init(this.width / 2, this.height / 2)
   }
 
   init() {
     this.player1Paddle.init()
     this.player2Paddle.init()
-    this.ball.init()
+    this.ball.init(this.width / 2, this.height / 2)
   }
 }

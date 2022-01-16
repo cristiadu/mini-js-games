@@ -2,7 +2,7 @@ import Ball from './Ball.js'
 import Block from './Block.js'
 import Paddle from './Paddle.js'
 import {
-  NUM_LINES_BLOCKS, SIZE_PADDLE, SIZE_BLOCK, THICKNESS_BLOCK,
+  NUM_LINES_BLOCKS, SIZE_PADDLE, SIZE_BLOCK, THICKNESS_BLOCK, THICKNESS_PADDLE, SCREEN_BACKGROUND_COLOR, GAME_LIVES,
 } from './globalVariables.js'
 
 export default class BreakoutGame {
@@ -12,7 +12,7 @@ export default class BreakoutGame {
     this.playerPaddle = new Paddle()
     this.ball = new Ball()
     this.blocks = []
-    this.lives = 3
+    this.lives = GAME_LIVES
     this.activeBlocks = 0
   }
 
@@ -28,7 +28,7 @@ export default class BreakoutGame {
 
   /* eslint-disable no-unused-vars */
   draw(ctx, dt) {
-    ctx.fillStyle = '#000'
+    ctx.fillStyle = SCREEN_BACKGROUND_COLOR
     ctx.fillRect(0, 0, this.width, this.height)
 
     this.ball.draw(ctx)
@@ -83,8 +83,13 @@ export default class BreakoutGame {
   }
 
   init() {
-    this.playerPaddle.init()
-    this.ball.init()
+    const paddleInitialX = window.game.width / 2
+    const paddleInitialY = window.game.height - THICKNESS_PADDLE - 10
+    this.playerPaddle.init(paddleInitialX, paddleInitialY)
+
+    const ballInitialX = window.game.width / 2
+    const ballInitialY = window.game.height / 2
+    this.ball.init(ballInitialX, ballInitialY)
 
     // Creating blocks
     let j = 0

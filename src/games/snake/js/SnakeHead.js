@@ -1,13 +1,15 @@
 import SnakeBody from './SnakeBody.js'
-import { DIRECTION, FOOD_SIZE, SIZE_SNAKE } from './globalVariables.js'
+import {
+  DIRECTION, FOOD_SIZE, SIZE_SNAKE, SNAKE_HEAD_COLOR, SNAKE_INITIAL_X, SNAKE_INITIAL_Y,
+} from './globalVariables.js'
 
 export default class SnakeHead {
   constructor() {
     this.body = null
     this.direction = DIRECTION.RIGHT
     this.lastDirection = DIRECTION.RIGHT
-    this.X = 2
-    this.Y = 2
+    this.X = SNAKE_INITIAL_X
+    this.Y = SNAKE_INITIAL_Y
   }
 
   update() {
@@ -41,14 +43,14 @@ export default class SnakeHead {
   }
 
   draw(ctx) {
-    ctx.fillStyle = '#00AA00'
+    ctx.fillStyle = SNAKE_HEAD_COLOR
     ctx.fillRect(this.X, this.Y, SIZE_SNAKE, SIZE_SNAKE)
     this.body.draw(ctx)
   }
 
   init() {
-    this.X = 2
-    this.Y = 2
+    this.X = SNAKE_INITIAL_X
+    this.Y = SNAKE_INITIAL_Y
     this.direction = DIRECTION.RIGHT
     this.lastDirection = DIRECTION.RIGHT
 

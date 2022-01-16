@@ -1,6 +1,6 @@
 import Keyboard from '../../../common/Keyboard.js'
 import {
-  KEYCODES, MAX_BOUNCE_ANGLE, PLAYER_TYPE, POSITION, REDUCED_SPEED_AI, SIZE_PADDLE, SPEED_PADDLE, THICKNESS_PADDLE,
+  KEYCODES, MAX_BOUNCE_ANGLE, PADDLE_COLOR, PLAYER_TYPE, POSITION, REDUCED_SPEED_AI, SIZE_PADDLE, SPEED_PADDLE, THICKNESS_PADDLE,
 } from './globalVariables.js'
 
 export default class Paddle {
@@ -23,7 +23,7 @@ export default class Paddle {
   }
 
   draw(ctx) {
-    ctx.fillStyle = '#fff'
+    ctx.fillStyle = PADDLE_COLOR
     ctx.fillRect(this.X, this.Y, THICKNESS_PADDLE, SIZE_PADDLE)
   }
 
