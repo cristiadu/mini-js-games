@@ -4,10 +4,10 @@ import PongGame from './PongGame.js'
 const cfg = {
   width: 1000,
   height: 800,
-  fps: 60,
+  fps: 120,
 }
 
-window.game = new PongGame(1000, 800)
+window.game = new PongGame(cfg.width, cfg.height)
 const gameMachine = new GameMachine(window.game, cfg, '.gameStage')
 window.game.init()
 gameMachine.start()

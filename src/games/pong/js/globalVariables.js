@@ -17,10 +17,19 @@ export const PLAYER_TYPE = {
 }
 
 export const BALL_RADIUS = 5
+export const BALL_INITIAL_SPEED = 1
 export const SIZE_PADDLE = 100
 export const THICKNESS_PADDLE = 10
 export const SPEED_PADDLE = 4
-export const REDUCED_SPEED_AI = 1
+export const REDUCED_SPEED_AI = 2
+
+export const PADDLE_INITIAL_X = 0
+export const PADDLE_INITIAL_Y = 0
+
+export const BALL_COLOR = '#fff'
+export const PADDLE_COLOR = '#fff'
+export const SCREEN_BACKGROUND_COLOR = '#000'
+export const TEXT_COLOR = '#fff'
 
 // 75 degrees
 export const MAX_BOUNCE_ANGLE = (5 * Math.PI) / 12

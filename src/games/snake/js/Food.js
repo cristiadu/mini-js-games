@@ -1,5 +1,7 @@
 import getRandomInt from './utils.js'
-import { FOOD_SIZE, SIZE_SNAKE, TIMEOUT_FOOD } from './globalVariables.js'
+import {
+  FOOD_COLOR, FOOD_SIZE, SIZE_SNAKE, TIMEOUT_FOOD,
+} from './globalVariables.js'
 
 export default class Food {
   constructor() {
@@ -16,7 +18,7 @@ export default class Food {
   }
 
   draw(ctx) {
-    ctx.fillStyle = '#FF0000'
+    ctx.fillStyle = FOOD_COLOR
     ctx.fillRect(this.X, this.Y, FOOD_SIZE, FOOD_SIZE)
   }
 
