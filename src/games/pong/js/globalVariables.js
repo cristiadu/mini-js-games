@@ -26,10 +26,10 @@ export const REDUCED_SPEED_AI = 2
 export const PADDLE_INITIAL_X = 0
 export const PADDLE_INITIAL_Y = 0
 
-export const BALL_COLOR = '#fff'
-export const PADDLE_COLOR = '#fff'
+export const BALL_COLOR = '#A288E3'
+export const PADDLE_COLOR = '#E5DCC5'
 export const SCREEN_BACKGROUND_COLOR = '#000'
-export const TEXT_COLOR = '#fff'
+export const TEXT_COLOR = '#C14953'
 
 // 75 degrees
 export const MAX_BOUNCE_ANGLE = (5 * Math.PI) / 12

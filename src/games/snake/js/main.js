@@ -4,7 +4,7 @@ import SnakeGame from './SnakeGame.js'
 const cfg = {
   width: 800,
   height: 800,
-  fps: 50,
+  fps: 30,
 }
 
 window.game = new SnakeGame(cfg.width, cfg.height)

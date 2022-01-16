@@ -13,8 +13,8 @@ export const SIZE_BLOCK = 100
 export const NUM_LINES_BLOCKS = 5
 export const GAME_LIVES = 3
 
-export const BALL_COLOR = '#fff'
-export const PADDLE_COLOR = '#fff'
+export const BALL_COLOR = '#E7F9A9'
+export const PADDLE_COLOR = '#F4AFB4'
 export const SCREEN_BACKGROUND_COLOR = '#000'
 
 // 75 degrees
