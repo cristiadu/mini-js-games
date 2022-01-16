@@ -1,15 +1,14 @@
 import Keyboard from '../../../common/Keyboard.js'
 import {
-  KEYCODES, MAX_BOUNCE_ANGLE, PADDLE_COLOR, PADDLE_INITIAL_X, PADDLE_INITIAL_Y,
-  PLAYER_TYPE, POSITION, REDUCED_SPEED_AI, SIZE_PADDLE, SPEED_PADDLE, THICKNESS_PADDLE,
+  KEYCODES, MAX_BOUNCE_ANGLE, PADDLE_COLOR, PLAYER_TYPE, POSITION, REDUCED_SPEED_AI, SIZE_PADDLE, SPEED_PADDLE, THICKNESS_PADDLE,
 } from './globalVariables.js'
 
 export default class Paddle {
   constructor(pos, pType) {
     this.playerType = pType
     this.position = pos
-    this.X = PADDLE_INITIAL_X
-    this.Y = PADDLE_INITIAL_Y
+    this.X = 0
+    this.Y = 0
     this.points = 0
   }
 
