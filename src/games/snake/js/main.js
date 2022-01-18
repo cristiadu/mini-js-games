@@ -8,6 +8,6 @@ const cfg = {
 }
 
 window.game = new SnakeGame(cfg.width, cfg.height)
-const gameMachine = new GameMachine(window.game, cfg, '.gameStage')
+window.gameMachine = new GameMachine(window.game, cfg, '.gameStage')
 window.game.init()
-gameMachine.start()
+window.gameMachine.start()
