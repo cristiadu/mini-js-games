@@ -2,9 +2,9 @@ import GameMachine from '../../../common/GameMachine.js'
 import SnakeGame from './SnakeGame.js'
 
 const cfg = {
-  width: 800,
-  height: 800,
-  fps: 30,
+  width: 796,
+  height: 796,
+  fps: 25,
 }
 
 window.game = new SnakeGame(cfg.width, cfg.height)

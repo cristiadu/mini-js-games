@@ -46,11 +46,11 @@ export default class Ball {
   changeDirection(bounceAngle) {
     // It hit a paddle, so increase speed.
     if (this.vY < 0) {
-      this.vY = -(this.vY + (-1.00) * Math.abs(Math.cos(bounceAngle)))
+      this.vY = -(this.vY + (-0.20) * Math.abs(Math.cos(bounceAngle)))
       this.vX += (1.00) * (-Math.sin(bounceAngle))
     } else {
       this.vX += (1.00) * (-Math.sin(bounceAngle))
-      this.vY = -(this.vY + (1.00) * Math.abs(Math.cos(bounceAngle)))
+      this.vY = -(this.vY + (0.20) * Math.abs(Math.cos(bounceAngle)))
     }
   }
 

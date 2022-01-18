@@ -22,14 +22,15 @@ export default class SnakeGame {
 
   /* eslint-disable no-unused-vars */
   draw(ctx, dt) {
+    if (this.gameOver) {
+      ctx.fillText('Game Over, press ESC if you want to restart.', 25, 25)
+      return
+    }
+
     ctx.fillStyle = SCREEN_BACKGROUND_COLOR
     ctx.fillRect(0, 0, this.width, this.height)
     this.food.draw(ctx)
     this.snake.draw(ctx)
-
-    if (this.gameOver) {
-      ctx.fillText('Game Over, press ESC if you want to restart.', 25, 25)
-    }
   }
   /* eslint-enable no-unused-vars */
 
