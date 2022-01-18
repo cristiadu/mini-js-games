@@ -71,7 +71,7 @@ export default class SnakeHead {
   }
 
   checkWallCollision() {
-    if ((this.X < 0) || (this.Y < 0) || ((this.X + SIZE_SNAKE) > window.game.width) || ((this.Y + SIZE_SNAKE) > window.game.height)) {
+    if (this.X < 0 || this.Y < 0 || this.X + SIZE_SNAKE > window.game.width || this.Y + SIZE_SNAKE > window.game.height) {
       window.game.gameIsOver()
     }
   }
