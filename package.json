@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/cristiadu/mini-js-games#readme",
   "dependencies": {
-    "express": "^4.17.2"
+    "express": "^4.17.3"
   },
   "devDependencies": {
     "eslint": "^8.8.0",
