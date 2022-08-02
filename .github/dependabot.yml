@@ -9,7 +9,7 @@ updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "daily"
+      interval: "monthly"
     # Specify labels for npm pull requests
     labels:
       - "gh-actions"
@@ -22,7 +22,7 @@ updates:
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
-      interval: "daily"
+      interval: "monthly"
     # Specify labels for npm pull requests
     labels:
       - "npm"
