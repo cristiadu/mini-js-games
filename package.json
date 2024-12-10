@@ -1,13 +1,13 @@
 {
   "name": "mini-js-games",
   "version": "1.0.0",
-  "description": "Small set of games made using Javascript",
+  "description": "A collection of small, interactive games developed using JavaScript, designed to demonstrate various programming concepts and provide entertainment.",
   "main": "index.js",
   "scripts": {
     "start": "node .",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "format-code": "./node_modules/.bin/eslint \"./src/**\" --fix --ignore-path ./.eslintignore",
-    "check-code": "./node_modules/.bin/eslint \"./src/**\" --ignore-path ./.eslintignore"
+    "lint:fix": "npx eslint \"./src/**\" --fix --ignore-path ./.eslintignore",
+    "lint": "npx eslint \"./src/**\" --ignore-path ./.eslintignore",
+    "update-dependencies": "npx npm-check-updates -u"
   },
   "repository": {
     "type": "git",
@@ -17,7 +17,7 @@
     "js",
     "games"
   ],
-  "author": "Cristiano Faustino",
+  "author": "Cristiano Faustino <cristiadu@gmail.com>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/cristiadu/mini-js-games/issues"
@@ -27,11 +27,11 @@
     "express": "^4.21.2"
   },
   "devDependencies": {
-    "eslint": "^8.56.0",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.31.0"
-  },
-  "engines": {
-    "node": "16.x"
+    "eslint": "^8.57.1",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-react": "^7.37.2",
+    "eslint-plugin-react-hooks": "^4.6.2"
   }
 }
