@@ -32,9 +32,9 @@ export default class Food {
       randomX = getRandomInt(0, window.game.width)
       randomY = getRandomInt(0, window.game.height)
       if (part.X < randomX + FOOD_SIZE && part.X + SIZE_SNAKE > randomX && part.Y < randomY + FOOD_SIZE && SIZE_SNAKE + part.Y > randomY) {
-        /* eslint-disable no-continue */
+         
         continue
-        /* eslint-enable no-continue */
+         
       } else {
         part = part.body
       }

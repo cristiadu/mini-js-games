@@ -1,12 +1,13 @@
 {
   "name": "mini-js-games",
+  "type": "module",
   "version": "1.0.0",
   "description": "A collection of small, interactive games developed using JavaScript, designed to demonstrate various programming concepts and provide entertainment.",
   "main": "index.js",
   "scripts": {
     "start": "node .",
-    "lint:fix": "npx eslint \"./src/**\" --fix --ignore-path ./.eslintignore",
-    "lint": "npx eslint \"./src/**\" --ignore-path ./.eslintignore",
+    "lint:fix": "npx eslint \"./src/**\" --fix",
+    "lint": "npx eslint \"./src/**\"",
     "update-dependencies": "npx npm-check-updates -u"
   },
   "repository": {
@@ -24,14 +25,14 @@
   },
   "homepage": "https://github.com/cristiadu/mini-js-games#readme",
   "dependencies": {
-    "express": "^5.2.0"
+    "express": "^5.2.1"
   },
   "devDependencies": {
-    "eslint": "^8.57.1",
-    "eslint-config-airbnb": "^19.0.4",
+    "eslint": "^9.39.1",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-react": "^7.37.5",
-    "eslint-plugin-react-hooks": "^4.6.2"
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "@eslint/js": "^9.39.1"
   }
 }
