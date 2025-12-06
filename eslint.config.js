@@ -1,5 +1,5 @@
-import js from "@eslint/js";
-import importPlugin from "eslint-plugin-import";
+import js from "@eslint/js"
+import importPlugin from "eslint-plugin-import"
 
 export default [
   js.configs.recommended,
@@ -42,4 +42,4 @@ export default [
       ],
     }
   }
-];
+]
