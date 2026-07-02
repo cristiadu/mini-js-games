@@ -4,7 +4,7 @@ Guidance for AI agents (and humans) working on this repo.
 
 ## What this is
 
-A collection of small browser games written in vanilla JavaScript (ES modules, no framework, no build step), rendered on an HTML `<canvas>`. A minimal Express server ([index.js](index.js)) serves the static files under `src/`.
+A collection of small browser games written in vanilla JavaScript (ES modules, no framework, no build step), rendered on an HTML `<canvas>`. A minimal Express server ([index.js](index.js)) serves the static files under `src/` for local development. Production is GitHub Pages: [.github/workflows/pages.yml](.github/workflows/pages.yml) deploys `src/` to https://jsgames.cristianofaustino.me on every push to `main` — asset paths must stay root-absolute (`/common/...`) or root-relative for both to work.
 
 ## Commands
 

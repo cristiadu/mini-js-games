@@ -15,3 +15,7 @@ pnpm start
 ```
 
 It will listen on port `4000` by default, it can be configured through the `PORT` environmental variable too.
+
+## Deployment
+
+The games are deployed to GitHub Pages at [jsgames.cristianofaustino.me](https://jsgames.cristianofaustino.me) on every push to `main`.
