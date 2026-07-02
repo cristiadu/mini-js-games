@@ -10,8 +10,8 @@ It contains the following games:
 ## Running Project
 
 ```
-npm install
-npm start
+pnpm install
+pnpm start
 ```
 
 It will listen on port `4000` by default, it can be configured through the `PORT` environmental variable too.

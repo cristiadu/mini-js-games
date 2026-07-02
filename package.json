@@ -6,10 +6,11 @@
   "main": "index.js",
   "scripts": {
     "start": "node .",
-    "lint:fix": "npx eslint \"./src/**\" --fix",
-    "lint": "npx eslint \"./src/**\"",
-    "update-dependencies": "npx npm-check-updates -u"
+    "lint:fix": "eslint \"./src/**\" --fix",
+    "lint": "eslint \"./src/**\"",
+    "update-dependencies": "pnpm update --latest"
   },
+  "packageManager": "pnpm@11.9.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cristiadu/mini-js-games.git"

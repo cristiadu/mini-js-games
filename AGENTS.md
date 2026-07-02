@@ -8,14 +8,18 @@ A collection of small browser games written in vanilla JavaScript (ES modules, n
 
 ## Commands
 
+The project uses pnpm (version pinned via `packageManager` in [package.json](package.json)).
+
 ```bash
-npm install     # install dependencies
-npm start       # serve on http://localhost:4000 (override with PORT)
-npm run lint    # eslint over ./src/**
-npm run lint:fix
+pnpm install     # install dependencies
+pnpm start       # serve on http://localhost:4000 (override with PORT)
+pnpm run lint    # eslint over ./src/**
+pnpm run lint:fix
 ```
 
-CI ([.github/workflows/node.js.yml](.github/workflows/node.js.yml)) runs `npm install` + `npm run lint` on Node 23.
+CI ([.github/workflows/node.js.yml](.github/workflows/node.js.yml)) runs `pnpm install --frozen-lockfile` + `pnpm run lint` on Node 23.
+
+Dependency resolution enforces a 3-day minimum release age (`minimumReleaseAge` in [pnpm-workspace.yaml](pnpm-workspace.yaml)) as a supply-chain guard — brand-new package releases are rejected until they have aged.
 
 ## Game engine
 

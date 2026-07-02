@@ -16,12 +16,11 @@ updates:
           - "*"
 
   # 🪄 Maintain dependencies for pnpm workspaces (or npm monorepo)
+  # Release-age gating is handled by pnpm itself (minimumReleaseAge in pnpm-workspace.yaml)
   - package-ecosystem: "npm"  # Dependabot uses npm logic for pnpm
     directory: "/"            # Root where pnpm-lock.yaml lives
     schedule:
       interval: "monthly"
-    cooldown:
-      default-days: 3
     labels:
       - "npm"
       - "dependencies"
