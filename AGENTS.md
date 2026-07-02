@@ -13,7 +13,7 @@ The project uses pnpm (version pinned via `packageManager` in [package.json](pac
 ```bash
 pnpm install     # install dependencies
 pnpm start       # serve on http://localhost:4000 (override with PORT)
-pnpm run lint    # eslint over ./src/**
+pnpm run lint    # eslint over the whole repo
 pnpm run lint:fix
 ```
 
@@ -71,6 +71,6 @@ The landing page [src/index.html](src/index.html) links to each game. When addin
 ## Conventions
 
 - ES modules everywhere; imports include the `.js` extension (enforced by `import-x/extensions`).
-- No semicolons, 2-space indent, max line length 140 — enforced by [eslint.config.js](eslint.config.js); run `npm run lint` before committing.
+- No semicolons, 2-space indent, max line length 140 — enforced by [eslint.config.js](eslint.config.js); run `pnpm run lint` before committing.
 - Per-game constants live in that game's `globalVariables.js`; shared engine code goes in `src/common/`.
-- No build step and no test suite — verify changes by running `npm start` and playing the game.
+- No build step and no test suite — verify changes by running `pnpm start` and playing the game.
