@@ -1,0 +1,8 @@
+# Only resolve package versions published for at least 3 days,
+# protecting against compromised releases (supply-chain attacks).
+minimumReleaseAge: 4320
+
+# unrs-resolver ships prebuilt platform binaries; its postinstall is only a
+# build-from-source fallback, so it does not need to run scripts.
+allowBuilds:
+  unrs-resolver: false

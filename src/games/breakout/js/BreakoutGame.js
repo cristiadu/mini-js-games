@@ -92,9 +92,8 @@ export default class BreakoutGame {
     this.ball.init(ballInitialX, ballInitialY)
 
     // Creating blocks
-    let j = 0
     for (let i = 0; i < NUM_LINES_BLOCKS; i += 1) {
-      for (j = 0; j < window.game.width / SIZE_BLOCK; j += 1) {
+      for (let j = 0; j < window.game.width / SIZE_BLOCK; j += 1) {
         this.blocks.push(new Block())
         this.blocks[i * (window.game.width / SIZE_BLOCK) + j].init(i, j)
       }
