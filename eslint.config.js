@@ -1,5 +1,5 @@
 import js from "@eslint/js"
-import importPlugin from "eslint-plugin-import"
+import importPlugin from "eslint-plugin-import-x"
 
 export default [
   js.configs.recommended,
@@ -16,10 +16,10 @@ export default [
       }
     },
     plugins: {
-      import: importPlugin
+      "import-x": importPlugin
     },
     rules: {
-      "import/extensions": [
+      "import-x/extensions": [
         "error",
         "never",
         {
