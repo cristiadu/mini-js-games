@@ -44,7 +44,7 @@ A game is any class implementing this contract:
 
 ### `Keyboard.js` — input
 
-A keydown/keyup listener that records pressed key codes in a static map. It self-registers a global singleton on load (`window.GameKeyboard`); games poll input inside `update()` via `Keyboard.isDown(keyCode)`.
+A keydown/keyup listener that records pressed keys in a static map, keyed by `KeyboardEvent.code` (e.g. `'ArrowLeft'`, `'KeyW'`). It self-registers a global singleton on load (`window.GameKeyboard`); games poll input inside `update()` via `Keyboard.isDown(code)`.
 
 ## Games
 
