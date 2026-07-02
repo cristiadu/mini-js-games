@@ -41,12 +41,12 @@ export default class PongGame {
 
     if (((this.ball.X + this.ball.radius) >= this.player2Paddle.X) && (this.player2Paddle.Y <= this.ball.Y)
       && ((this.player2Paddle.Y + SIZE_PADDLE) >= this.ball.Y)) {
-      const bounceAngle = this.player1Paddle.getBounceAngle(this.ball.Y)
+      const bounceAngle = this.player2Paddle.getBounceAngle(this.ball.Y)
       this.ball.changeDirection(bounceAngle)
       collides = true
     } else if (((this.ball.X - this.ball.radius) <= (this.player1Paddle.X + THICKNESS_PADDLE))
       && (this.player1Paddle.Y <= this.ball.Y) && ((this.player1Paddle.Y + SIZE_PADDLE) >= this.ball.Y)) {
-      const bounceAngle = this.player2Paddle.getBounceAngle(this.ball.Y)
+      const bounceAngle = this.player1Paddle.getBounceAngle(this.ball.Y)
       this.ball.changeDirection(bounceAngle)
       collides = true
     }
