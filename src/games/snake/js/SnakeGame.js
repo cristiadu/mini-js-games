@@ -2,7 +2,7 @@ import Keyboard from '../../../common/Keyboard.js'
 import Food from './Food.js'
 import SnakeHead from './SnakeHead.js'
 import {
-  ARROW_KEYS, DIRECTION, ESCAPE_KEY, SCREEN_BACKGROUND_COLOR,
+  ARROW_KEYS, DIRECTION, ESCAPE_KEY, SCREEN_BACKGROUND_COLOR, TEXT_COLOR,
 } from './globalVariables.js'
 
 export default class SnakeGame {
@@ -24,13 +24,16 @@ export default class SnakeGame {
 
   /* eslint-disable no-unused-vars */
   draw(ctx, dt) {
+    ctx.fillStyle = SCREEN_BACKGROUND_COLOR
+    ctx.fillRect(0, 0, this.width, this.height)
+
     if (this.gameOver) {
-      ctx.fillText('Game Over, press ESC if you want to restart.', 25, 25)
+      ctx.fillStyle = TEXT_COLOR
+      ctx.font = '24px monospace'
+      ctx.fillText('Game Over, press ESC if you want to restart.', 25, 50)
       return
     }
 
-    ctx.fillStyle = SCREEN_BACKGROUND_COLOR
-    ctx.fillRect(0, 0, this.width, this.height)
     this.food.draw(ctx)
     this.snake.draw(ctx)
   }

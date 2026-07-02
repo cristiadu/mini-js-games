@@ -23,39 +23,35 @@ export default class Food {
   }
 
   generateFood() {
-    let randomX; let
-      randomY
-    let inSnake = true
-    let part = window.game.snake
+    let randomX
+    let randomY
 
-    while (inSnake) {
-      randomX = getRandomInt(0, window.game.width)
-      randomY = getRandomInt(0, window.game.height)
-      if (part.X < randomX + FOOD_SIZE && part.X + SIZE_SNAKE > randomX && part.Y < randomY + FOOD_SIZE && SIZE_SNAKE + part.Y > randomY) {
-         
-        continue
-         
-      } else {
-        part = part.body
-      }
-
-      while (part != null) {
-        if (part.X < randomX + FOOD_SIZE && part.X + SIZE_SNAKE > randomX && part.Y < randomY + FOOD_SIZE
-          && SIZE_SNAKE + part.Y > randomY) {
-          break
-        } else {
-          part = part.next
-        }
-      }
-
-      if (part == null) {
-        inSnake = false
-      }
-    }
+    do {
+      randomX = getRandomInt(0, window.game.width - FOOD_SIZE)
+      randomY = getRandomInt(0, window.game.height - FOOD_SIZE)
+    } while (this.overlapsSnake(randomX, randomY))
 
     this.X = randomX
     this.Y = randomY
     this.elapsedTime = 0
+  }
+
+  overlapsSnake(x, y) {
+    const overlapsPart = (part) => part.X < x + FOOD_SIZE && part.X + SIZE_SNAKE > x
+      && part.Y < y + FOOD_SIZE && part.Y + SIZE_SNAKE > y
+
+    const head = window.game.snake
+    if (overlapsPart(head)) {
+      return true
+    }
+
+    for (let part = head.body; part != null; part = part.next) {
+      if (overlapsPart(part)) {
+        return true
+      }
+    }
+
+    return false
   }
 
   init() {
