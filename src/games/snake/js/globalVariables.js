@@ -1,9 +1,11 @@
-export const ARROWS_KEYCODES = {
-  left: 37,
-  up: 38,
-  right: 39,
-  down: 40,
+export const ARROW_KEYS = {
+  left: 'ArrowLeft',
+  up: 'ArrowUp',
+  right: 'ArrowRight',
+  down: 'ArrowDown',
 }
+
+export const ESCAPE_KEY = 'Escape'
 
 export const DIRECTION = {
   UP: 'Up',
@@ -20,5 +22,6 @@ export const SNAKE_INITIAL_Y = 2
 
 export const FOOD_COLOR = '#EB9486'
 export const SCREEN_BACKGROUND_COLOR = '#000'
+export const TEXT_COLOR = '#FFF'
 export const SNAKE_HEAD_COLOR = '#107E7D'
 export const SNAKE_BODY_COLOR = '#C7EFCF'

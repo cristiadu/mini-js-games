@@ -12,7 +12,8 @@ export default [
       globals: {
         window: "readonly",
         document: "readonly",
-        requestAnimationFrame: "readonly"
+        requestAnimationFrame: "readonly",
+        performance: "readonly"
       }
     },
     plugins: {
@@ -40,6 +41,16 @@ export default [
         "error",
         "never"
       ],
+    }
+  },
+  {
+    // Root-level files (the Express server and this config) run in Node
+    files: ["*.js"],
+    languageOptions: {
+      globals: {
+        process: "readonly",
+        console: "readonly"
+      }
     }
   }
 ]
