@@ -1,8 +1,8 @@
-export const KEYCODES = {
-  up: 38,
-  down: 40,
-  w: 87,
-  s: 83,
+export const KEYS = {
+  up: 'ArrowUp',
+  down: 'ArrowDown',
+  w: 'KeyW',
+  s: 'KeyS',
 }
 
 export const POSITION = {

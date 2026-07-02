@@ -1,7 +1,6 @@
 const STATES = {
   PLAYING: 0,
   STOPPED: 1,
-  PAUSED: 2,
 }
 
 export default class GameMachine {
@@ -11,8 +10,8 @@ export default class GameMachine {
     this.gameCanvas = document.querySelector(selector)
     this.context = this.gameCanvas.getContext('2d')
     this.now = 0
-    this.ellapsed = 0
-    this.last = new Date().getTime()
+    this.elapsed = 0
+    this.last = performance.now()
     this.fps = cfg.fps || 60
     this.dStep = 1000 / this.fps
     this.accumulator = 0
@@ -24,12 +23,11 @@ export default class GameMachine {
     this.gameCanvas.width = cfg.width
     this.gameCanvas.height = cfg.height
 
-    this.state = STATES.PLAYING
     this.step = () => {
-      this.now = new Date().getTime()
-      this.ellapsed = this.now - this.last
+      this.now = performance.now()
+      this.elapsed = this.now - this.last
       this.last = this.now
-      this.accumulator += Math.min(1000, this.ellapsed)
+      this.accumulator += Math.min(1000, this.elapsed)
 
       while (this.accumulator >= this.dStep) {
         this.game.update()
@@ -38,12 +36,14 @@ export default class GameMachine {
       this.game.draw(this.context, this.accumulator)
 
       if (this.state === STATES.PLAYING) {
-        requestAnimationFrame(this.step, this.gameCanvas)
+        requestAnimationFrame(this.step)
       }
     }
   }
 
   start = () => {
+    this.state = STATES.PLAYING
+    this.last = performance.now()
     this.step()
   }
 }

@@ -1,6 +1,6 @@
 import Keyboard from '../../../common/Keyboard.js'
 import {
-  KEYCODES, MAX_BOUNCE_ANGLE, PADDLE_COLOR, SIZE_PADDLE, SPEED_PADDLE, THICKNESS_PADDLE,
+  KEYS, MAX_BOUNCE_ANGLE, PADDLE_COLOR, SIZE_PADDLE, SPEED_PADDLE, THICKNESS_PADDLE,
 } from './globalVariables.js'
 
 export default class Paddle {
@@ -20,9 +20,9 @@ export default class Paddle {
   }
 
   checkInput() {
-    if (Keyboard.isDown(KEYCODES.left)) {
+    if (Keyboard.isDown(KEYS.left)) {
       this.X -= SPEED_PADDLE
-    } else if (Keyboard.isDown(KEYCODES.right)) {
+    } else if (Keyboard.isDown(KEYS.right)) {
       this.X += SPEED_PADDLE
     }
   }
