@@ -1,6 +1,6 @@
-export const KEYCODES = {
-  left: 37,
-  right: 39,
+export const KEYS = {
+  left: 'ArrowLeft',
+  right: 'ArrowRight',
 }
 
 export const BALL_RADIUS = 5

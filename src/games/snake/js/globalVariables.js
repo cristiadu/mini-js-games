@@ -1,9 +1,11 @@
-export const ARROWS_KEYCODES = {
-  left: 37,
-  up: 38,
-  right: 39,
-  down: 40,
+export const ARROW_KEYS = {
+  left: 'ArrowLeft',
+  up: 'ArrowUp',
+  right: 'ArrowRight',
+  down: 'ArrowDown',
 }
+
+export const ESCAPE_KEY = 'Escape'
 
 export const DIRECTION = {
   UP: 'Up',
