@@ -2,7 +2,7 @@ import Ball from './Ball.js'
 import Block from './Block.js'
 import Paddle from './Paddle.js'
 import {
-  NUM_LINES_BLOCKS, SIZE_PADDLE, SIZE_BLOCK, TEXT_COLOR, THICKNESS_BLOCK, THICKNESS_PADDLE, SCREEN_BACKGROUND_COLOR, GAME_LIVES,
+  NUM_LINES_BLOCKS, SIZE_PADDLE, SIZE_BLOCK, THICKNESS_BLOCK, THICKNESS_PADDLE, SCREEN_BACKGROUND_COLOR, GAME_LIVES,
 } from './globalVariables.js'
 
 export default class BreakoutGame {
@@ -17,12 +17,16 @@ export default class BreakoutGame {
   }
 
   update() {
-    if ((this.activeBlocks > 0) && (this.lives > 0)) {
-      this.ball.update()
-      this.playerPaddle.update()
-      const collidesPaddle = this.checkCollisionBallwithPaddle()
-      const collidesBlock = this.checkCollisionBallwithBlock()
-      this.ball.checkCollisionWithHorizontalWall(collidesPaddle || collidesBlock)
+    this.ball.update()
+    this.playerPaddle.update()
+    const collidesPaddle = this.checkCollisionBallwithPaddle()
+    const collidesBlock = this.checkCollisionBallwithBlock()
+    this.ball.checkCollisionWithHorizontalWall(collidesPaddle || collidesBlock)
+
+    if (this.activeBlocks <= 0) {
+      this.machine.gameOver('You won!')
+    } else if (this.lives <= 0) {
+      this.machine.gameOver('You lost!')
     }
   }
 
@@ -37,12 +41,6 @@ export default class BreakoutGame {
     this.blocks.forEach((block) => {
       block.draw(ctx)
     })
-
-    if (this.activeBlocks <= 0 || this.lives <= 0) {
-      ctx.fillStyle = TEXT_COLOR
-      ctx.font = '48px monospace'
-      ctx.fillText(this.activeBlocks <= 0 ? 'You won!' : 'You lost!', 25, 250)
-    }
   }
   /* eslint-enable no-unused-vars */
 
@@ -91,7 +89,10 @@ export default class BreakoutGame {
     const ballInitialY = window.game.height / 2
     this.ball.init(ballInitialX, ballInitialY)
 
-    // Creating blocks
+    this.lives = GAME_LIVES
+
+    // Rebuilding blocks (init also runs on restart)
+    this.blocks = []
     for (let i = 0; i < NUM_LINES_BLOCKS; i += 1) {
       for (let j = 0; j < window.game.width / SIZE_BLOCK; j += 1) {
         this.blocks.push(new Block())

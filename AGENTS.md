@@ -33,6 +33,8 @@ The engine lives in `src/common/` and has two pieces:
 - Each frame it accumulates elapsed wall-clock time and calls `game.update()` once per fixed step (`1000 / fps` ms) until the accumulator drains — so game logic advances at a constant rate regardless of frame rate.
 - After updating, it calls `game.draw(context, accumulator)` once with the canvas 2D context.
 - It sets `game.machine = this` back-reference on construction, and `start()` kicks off the loop.
+- **Pause**: pressing `P` toggles PLAYING ↔ PAUSED for every game — while paused, updates stop and the machine draws a "Paused" overlay on top of the frozen frame.
+- **Game over**: a game ends its round by calling `this.machine.gameOver(message)`. The machine freezes updates, draws the message in an overlay with "Press ESC to restart", and on ESC calls `game.init()` and resumes — so `init()` must fully reset the game's state (see BreakoutGame rebuilding its blocks).
 
 A game is any class implementing this contract:
 
@@ -40,7 +42,7 @@ A game is any class implementing this contract:
 |--------|---------|
 | `update()` | Advance game logic by one fixed step (input, movement, collisions) |
 | `draw(ctx, dt)` | Render current state to the canvas 2D context |
-| `init()` | Position entities before the loop starts (called by the game's `main.js`) |
+| `init()` | Position/reset all entities; called by the game's `main.js` before the loop starts and by the machine on every ESC restart |
 
 ### `Keyboard.js` — input
 
