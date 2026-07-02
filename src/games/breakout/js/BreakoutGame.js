@@ -2,7 +2,7 @@ import Ball from './Ball.js'
 import Block from './Block.js'
 import Paddle from './Paddle.js'
 import {
-  NUM_LINES_BLOCKS, SIZE_PADDLE, SIZE_BLOCK, THICKNESS_BLOCK, THICKNESS_PADDLE, SCREEN_BACKGROUND_COLOR, GAME_LIVES,
+  NUM_LINES_BLOCKS, SIZE_PADDLE, SIZE_BLOCK, TEXT_COLOR, THICKNESS_BLOCK, THICKNESS_PADDLE, SCREEN_BACKGROUND_COLOR, GAME_LIVES,
 } from './globalVariables.js'
 
 export default class BreakoutGame {
@@ -20,9 +20,9 @@ export default class BreakoutGame {
     if ((this.activeBlocks > 0) && (this.lives > 0)) {
       this.ball.update()
       this.playerPaddle.update()
-      const collides = this.checkCollisionBallwithPaddle()
-      const collides2 = this.checkCollisionBallwithBlock()
-      this.ball.checkCollisionWithHorizontalWall(collides && collides2)
+      const collidesPaddle = this.checkCollisionBallwithPaddle()
+      const collidesBlock = this.checkCollisionBallwithBlock()
+      this.ball.checkCollisionWithHorizontalWall(collidesPaddle || collidesBlock)
     }
   }
 
@@ -34,14 +34,14 @@ export default class BreakoutGame {
     this.ball.draw(ctx)
     this.playerPaddle.draw(ctx)
 
-    Object.values(this.blocks).forEach((block) => {
+    this.blocks.forEach((block) => {
       block.draw(ctx)
     })
 
-    if (this.activeBlocks <= 0) {
-      ctx.fillText('You won!', 25, 25)
-    } else if (this.lives <= 0) {
-      ctx.fillText('You lost!', 25, 25)
+    if (this.activeBlocks <= 0 || this.lives <= 0) {
+      ctx.fillStyle = TEXT_COLOR
+      ctx.font = '48px monospace'
+      ctx.fillText(this.activeBlocks <= 0 ? 'You won!' : 'You lost!', 25, 250)
     }
   }
   /* eslint-enable no-unused-vars */

@@ -16,6 +16,7 @@ export const GAME_LIVES = 3
 export const BALL_COLOR = '#E7F9A9'
 export const PADDLE_COLOR = '#F4AFB4'
 export const SCREEN_BACKGROUND_COLOR = '#000'
+export const TEXT_COLOR = '#FFF'
 
 // 75 degrees
 export const MAX_BOUNCE_ANGLE = (5 * Math.PI) / 12
