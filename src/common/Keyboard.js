@@ -1,21 +1,15 @@
 export default class Keyboard {
-  static mappedKeys = {}
+  static pressedKeys = {}
 
   constructor(selector) {
     this.element = selector ? document.querySelector(selector) : document
 
     this.keyDown = (event) => {
-      const evt = window.event || event
-      const code = evt.which || evt.keyCode
-      Keyboard.mappedKeys[code] = true
+      Keyboard.pressedKeys[event.code] = true
     }
 
     this.keyUp = (event) => {
-      const evt = window.event || event
-      const code = evt.which || evt.keyCode
-      if (typeof (Keyboard.mappedKeys[code]) === 'boolean') {
-        Keyboard.mappedKeys[code] = false
-      }
+      Keyboard.pressedKeys[event.code] = false
     }
   }
 
@@ -30,10 +24,7 @@ export default class Keyboard {
   }
 
   static isDown(key) {
-    if (Keyboard.mappedKeys[key]) {
-      return true
-    }
-    return false
+    return Keyboard.pressedKeys[key] === true
   }
 }
 
