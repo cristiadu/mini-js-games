@@ -1,6 +1,18 @@
 import { DIRECTION, SIZE_SNAKE, SNAKE_BODY_COLOR } from './globalVariables.js'
 
+/**
+ * One segment of the snake's body. Segments form a doubly linked list behind
+ * the head; each update a segment adopts the direction its predecessor had on
+ * the previous tick, which makes turns ripple down the body one cell at a time.
+ */
 export default class SnakeBody {
+  /**
+   * Creates a segment attached behind an existing part.
+   *
+   * @param {number} initialX Starting X position in pixels.
+   * @param {number} initialY Starting Y position in pixels.
+   * @param {SnakeBody|import('./SnakeHead.js').default} previous The part this segment follows (head or another segment).
+   */
   constructor(initialX, initialY, previous) {
     this.next = null
     this.prev = previous
@@ -10,6 +22,7 @@ export default class SnakeBody {
     this.Y = initialY
   }
 
+  /** Moves one cell in the predecessor's previous direction, then updates the next segment. */
   update() {
     // Next element will get direction from before the update
     this.lastDirection = this.direction
@@ -38,6 +51,11 @@ export default class SnakeBody {
     }
   }
 
+  /**
+   * Renders this segment and, recursively, the rest of the tail.
+   *
+   * @param {CanvasRenderingContext2D} ctx Canvas 2D context.
+   */
   draw(ctx) {
     ctx.fillStyle = SNAKE_BODY_COLOR
     ctx.fillRect(this.X, this.Y, SIZE_SNAKE, SIZE_SNAKE)
@@ -46,6 +64,7 @@ export default class SnakeBody {
     }
   }
 
+  /** Appends one segment at the tail, placed one cell behind the last segment's direction of travel. */
   increase() {
     if (this.next != null) {
       this.next.increase()

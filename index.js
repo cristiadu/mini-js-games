@@ -1,3 +1,7 @@
+/**
+ * Minimal Express server for local development: serves the static game files
+ * under ./src on PORT (default 4000). Production hosting is GitHub Pages.
+ */
 import express from 'express'
 import path from 'path'
 
