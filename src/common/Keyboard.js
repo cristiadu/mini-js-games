@@ -4,7 +4,7 @@
  * the project listens to lives in one place.
  * @enum {string}
  */
-export const KEY = {
+export const Keys = {
   ARROW_LEFT: 'ArrowLeft',
   ARROW_RIGHT: 'ArrowRight',
   ARROW_UP: 'ArrowUp',
@@ -19,7 +19,7 @@ export const KEY = {
  * Keydown/keyup listener that records pressed keys in a static map, keyed by
  * KeyboardEvent.code (e.g. 'ArrowLeft', 'KeyW'). A global singleton is
  * self-registered on load as window.GameKeyboard; games poll input inside
- * their update() via the static Keyboard.isDown(code), passing KEY entries.
+ * their update() via the static Keyboard.isDown(code), passing Keys entries.
  */
 export default class Keyboard {
   /** @type {Object<string, boolean>} Pressed state per KeyboardEvent.code, shared by all instances. */
@@ -65,7 +65,7 @@ export default class Keyboard {
   /**
    * Reports whether a key is currently held down.
    *
-   * @param {string} key KeyboardEvent.code to check, usually a KEY entry, e.g. KEY.ARROW_UP.
+   * @param {string} key KeyboardEvent.code to check, usually a Keys entry, e.g. Keys.ARROW_UP.
    * @returns {boolean} True while the key is pressed.
    */
   static isDown(key) {

@@ -1,10 +1,10 @@
-import Keyboard, { KEY } from './Keyboard.js'
+import Keyboard, { Keys } from './Keyboard.js'
 
 /** Key that toggles pause in every game. */
-const PAUSE_KEY = KEY.P
+const PAUSE_KEY = Keys.P
 
 /** Key that restarts a finished game. */
-const RESTART_KEY = KEY.ESCAPE
+const RESTART_KEY = Keys.ESCAPE
 
 /** Semi-transparent dim drawn over the frozen frame while paused or game over. */
 const OVERLAY_BACKGROUND_COLOR = 'rgba(0, 0, 0, 0.6)'
