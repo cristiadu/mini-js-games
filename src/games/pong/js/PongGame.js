@@ -25,7 +25,7 @@ export default class PongGame {
   }
 
   /** Advances one fixed step: moves the ball and paddles, then resolves collisions and scoring. */
-  update() {
+  update = () => {
     this.ball.update()
     this.player1Paddle.update()
     this.player2Paddle.update()
@@ -40,7 +40,7 @@ export default class PongGame {
    * @param {CanvasRenderingContext2D} ctx Canvas 2D context.
    * @param {number} dt Accumulator remainder in ms (unused).
    */
-  draw(ctx, dt) {
+  draw = (ctx, dt) => {
     ctx.fillStyle = SCREEN_BACKGROUND_COLOR
     ctx.fillRect(0, 0, this.width, this.height)
 
@@ -60,7 +60,7 @@ export default class PongGame {
    *
    * @returns {boolean} True when the ball hit a paddle this step.
    */
-  checkCollisionBallwithPaddle() {
+  checkCollisionBallwithPaddle = () => {
     let collides = false
 
     if (((this.ball.X + this.ball.radius) >= this.player2Paddle.X) && (this.player2Paddle.Y <= this.ball.Y)
@@ -84,7 +84,7 @@ export default class PongGame {
    *
    * @param {string} pos POSITION value of the wall the ball went out on.
    */
-  scorePoint(pos) {
+  scorePoint = (pos) => {
     if (pos === POSITION.LEFT) {
       this.player2Paddle.points += 1
     } else if (pos === POSITION.RIGHT) {
@@ -95,7 +95,7 @@ export default class PongGame {
   }
 
   /** Resets both paddles (position and score) and centers the ball. */
-  init() {
+  init = () => {
     this.player1Paddle.init()
     this.player2Paddle.init()
     this.ball.init(this.width / 2, this.height / 2)

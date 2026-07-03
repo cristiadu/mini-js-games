@@ -32,32 +32,32 @@ export default class Keyboard {
    */
   constructor(selector) {
     this.element = selector ? document.querySelector(selector) : document
+  }
 
-    /**
-     * Marks the event's key as pressed.
-     * @param {KeyboardEvent} event
-     */
-    this.keyDown = (event) => {
-      Keyboard.pressedKeys[event.code] = true
-    }
+  /**
+   * Marks the event's key as pressed.
+   * @param {KeyboardEvent} event
+   */
+  keyDown = (event) => {
+    Keyboard.pressedKeys[event.code] = true
+  }
 
-    /**
-     * Marks the event's key as released.
-     * @param {KeyboardEvent} event
-     */
-    this.keyUp = (event) => {
-      Keyboard.pressedKeys[event.code] = false
-    }
+  /**
+   * Marks the event's key as released.
+   * @param {KeyboardEvent} event
+   */
+  keyUp = (event) => {
+    Keyboard.pressedKeys[event.code] = false
   }
 
   /** Attaches the keydown/keyup listeners to the target element. */
-  start() {
+  start = () => {
     this.element.addEventListener('keydown', this.keyDown)
     this.element.addEventListener('keyup', this.keyUp)
   }
 
   /** Detaches the keydown/keyup listeners from the target element. */
-  stop() {
+  stop = () => {
     this.element.removeEventListener('keydown', this.keyDown)
     this.element.removeEventListener('keyup', this.keyUp)
   }
@@ -68,7 +68,7 @@ export default class Keyboard {
    * @param {string} key KeyboardEvent.code to check, usually a Keys entry, e.g. Keys.ARROW_UP.
    * @returns {boolean} True while the key is pressed.
    */
-  static isDown(key) {
+  static isDown = (key) => {
     return Keyboard.pressedKeys[key] === true
   }
 }

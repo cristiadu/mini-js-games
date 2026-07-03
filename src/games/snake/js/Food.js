@@ -16,7 +16,7 @@ export default class Food {
   }
 
   /** Counts one update tick and respawns the pellet once it has sat uneaten too long. */
-  update() {
+  update = () => {
     this.elapsedTime += 1
     if (this.elapsedTime >= TIMEOUT_FOOD) {
       this.generateFood()
@@ -28,13 +28,13 @@ export default class Food {
    *
    * @param {CanvasRenderingContext2D} ctx Canvas 2D context.
    */
-  draw(ctx) {
+  draw = (ctx) => {
     ctx.fillStyle = FOOD_COLOR
     ctx.fillRect(this.X, this.Y, FOOD_SIZE, FOOD_SIZE)
   }
 
   /** Moves the pellet to a random in-bounds position that does not overlap the snake. */
-  generateFood() {
+  generateFood = () => {
     let randomX
     let randomY
 
@@ -55,7 +55,7 @@ export default class Food {
    * @param {number} y Candidate Y position in pixels.
    * @returns {boolean} True when the position intersects the head or any body segment.
    */
-  overlapsSnake(x, y) {
+  overlapsSnake = (x, y) => {
     const overlapsPart = (part) => part.X < x + FOOD_SIZE && part.X + SIZE_SNAKE > x
       && part.Y < y + FOOD_SIZE && part.Y + SIZE_SNAKE > y
 
@@ -74,7 +74,7 @@ export default class Food {
   }
 
   /** Places the pellet for a fresh round. */
-  init() {
+  init = () => {
     this.generateFood()
   }
 }

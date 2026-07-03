@@ -22,7 +22,7 @@ export default class SnakeHead {
    * Advances one cell in the current direction, grows and respawns the food if
    * eating, propagates movement down the body, then checks collisions.
    */
-  update() {
+  update = () => {
     switch (this.direction) {
       case DIRECTION.RIGHT:
         this.X += SIZE_SNAKE
@@ -57,14 +57,14 @@ export default class SnakeHead {
    *
    * @param {CanvasRenderingContext2D} ctx Canvas 2D context.
    */
-  draw(ctx) {
+  draw = (ctx) => {
     ctx.fillStyle = SNAKE_HEAD_COLOR
     ctx.fillRect(this.X, this.Y, SIZE_SNAKE, SIZE_SNAKE)
     this.body.draw(ctx)
   }
 
   /** Resets position/direction and rebuilds the body at its starting length. */
-  init() {
+  init = () => {
     this.X = SNAKE_INITIAL_X
     this.Y = SNAKE_INITIAL_Y
     this.direction = DIRECTION.RIGHT
@@ -76,7 +76,7 @@ export default class SnakeHead {
   }
 
   /** Ends the game if the head overlaps any body segment. */
-  checkBodyCollision() {
+  checkBodyCollision = () => {
     let part = this.body
     while (part != null) {
       if (this.X < part.X + SIZE_SNAKE && this.X + SIZE_SNAKE > part.X && this.Y < part.Y + SIZE_SNAKE && SIZE_SNAKE + this.Y > part.Y) {
@@ -88,7 +88,7 @@ export default class SnakeHead {
   }
 
   /** Ends the game if the head has left the playfield. */
-  checkWallCollision() {
+  checkWallCollision = () => {
     if (this.X < 0 || this.Y < 0 || this.X + SIZE_SNAKE > window.game.width || this.Y + SIZE_SNAKE > window.game.height) {
       window.game.gameIsOver()
     }
@@ -99,7 +99,7 @@ export default class SnakeHead {
    *
    * @param {string} updatedDirection One of the DIRECTION values.
    */
-  changeDirection(updatedDirection) {
+  changeDirection = (updatedDirection) => {
     this.lastDirection = this.direction
     this.direction = updatedDirection
   }
@@ -109,7 +109,7 @@ export default class SnakeHead {
    *
    * @returns {boolean} True when the head and food rectangles intersect.
    */
-  isEatingFood() {
+  isEatingFood = () => {
     if (this.X < window.game.food.X + FOOD_SIZE && this.X + SIZE_SNAKE > window.game.food.X
       && this.Y < window.game.food.Y + FOOD_SIZE && SIZE_SNAKE + this.Y > window.game.food.Y) {
       return true

@@ -71,40 +71,40 @@ export default class GameMachine {
 
     this.gameCanvas.width = cfg.width
     this.gameCanvas.height = cfg.height
+  }
 
-    /**
-     * Runs one frame: handles pause/restart input, drains the accumulator
-     * through game.update() while PLAYING, draws the game and any overlay,
-     * and schedules the next frame.
-     */
-    this.step = () => {
-      this.now = performance.now()
-      this.elapsed = this.now - this.last
-      this.last = this.now
+  /**
+   * Runs one frame: handles pause/restart input, drains the accumulator
+   * through game.update() while PLAYING, draws the game and any overlay,
+   * and schedules the next frame.
+   */
+  step = () => {
+    this.now = performance.now()
+    this.elapsed = this.now - this.last
+    this.last = this.now
 
-      this.handleStateInput()
+    this.handleStateInput()
 
-      if (this.state === STATES.PLAYING) {
-        this.accumulator += Math.min(1000, this.elapsed)
+    if (this.state === STATES.PLAYING) {
+      this.accumulator += Math.min(1000, this.elapsed)
 
-        // A game.update() may end the game mid-tick, so re-check the state
-        while (this.state === STATES.PLAYING && this.accumulator >= this.dStep) {
-          this.game.update()
-          this.accumulator -= this.dStep
-        }
+      // A game.update() may end the game mid-tick, so re-check the state
+      while (this.state === STATES.PLAYING && this.accumulator >= this.dStep) {
+        this.game.update()
+        this.accumulator -= this.dStep
       }
+    }
 
-      this.game.draw(this.context, this.accumulator)
+    this.game.draw(this.context, this.accumulator)
 
-      if (this.state === STATES.PAUSED) {
-        this.drawOverlay('Paused', 'Press P to resume')
-      } else if (this.state === STATES.GAME_OVER) {
-        this.drawOverlay(this.gameOverMessage, 'Press ESC to restart')
-      }
+    if (this.state === STATES.PAUSED) {
+      this.drawOverlay('Paused', 'Press P to resume')
+    } else if (this.state === STATES.GAME_OVER) {
+      this.drawOverlay(this.gameOverMessage, 'Press ESC to restart')
+    }
 
-      if (this.state !== STATES.STOPPED) {
-        requestAnimationFrame(this.step)
-      }
+    if (this.state !== STATES.STOPPED) {
+      requestAnimationFrame(this.step)
     }
   }
 
@@ -121,13 +121,13 @@ export default class GameMachine {
    *
    * @param {string} message Overlay title, e.g. 'Game Over' or 'You won!'.
    */
-  gameOver(message) {
+  gameOver = (message) => {
     this.gameOverMessage = message
     this.state = STATES.GAME_OVER
   }
 
   /** Resets the game through game.init() and resumes playing. */
-  restart() {
+  restart = () => {
     this.gameOverMessage = ''
     this.accumulator = 0
     this.game.init()
@@ -138,7 +138,7 @@ export default class GameMachine {
    * Polls the pause and restart keys once per frame. The pause key is
    * edge-detected so holding it down toggles only once.
    */
-  handleStateInput() {
+  handleStateInput = () => {
     const pauseKeyIsDown = Keyboard.isDown(PAUSE_KEY)
     if (pauseKeyIsDown && !this.pauseKeyWasDown) {
       if (this.state === STATES.PLAYING) {
@@ -160,7 +160,7 @@ export default class GameMachine {
    * @param {string} title Large overlay headline.
    * @param {string} subtitle Hint line rendered below the title.
    */
-  drawOverlay(title, subtitle) {
+  drawOverlay = (title, subtitle) => {
     const ctx = this.context
     ctx.save()
     ctx.fillStyle = OVERLAY_BACKGROUND_COLOR

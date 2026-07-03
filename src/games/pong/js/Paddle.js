@@ -24,7 +24,7 @@ export default class Paddle {
   }
 
   /** Advances one step: applies AI or keyboard movement, then clamps to the playfield. */
-  update() {
+  update = () => {
     if (this.playerType === PLAYER_TYPE.AI) {
       this.moveAI()
     } else {
@@ -39,13 +39,13 @@ export default class Paddle {
    *
    * @param {CanvasRenderingContext2D} ctx Canvas 2D context.
    */
-  draw(ctx) {
+  draw = (ctx) => {
     ctx.fillStyle = PADDLE_COLOR
     ctx.fillRect(this.X, this.Y, THICKNESS_PADDLE, SIZE_PADDLE)
   }
 
   /** Moves up/down from this player's mapped keys (arrows for HUMAN, W/S for HUMAN2). */
-  checkInput() {
+  checkInput = () => {
     const controls = CONTROLS[this.playerType]
     if (Keyboard.isDown(controls.down)) {
       this.Y += SPEED_PADDLE
@@ -55,7 +55,7 @@ export default class Paddle {
   }
 
   /** Tracks the ball at reduced speed so the AI stays beatable. */
-  moveAI() {
+  moveAI = () => {
     if ((this.Y + SIZE_PADDLE / 2) > window.game.ball.Y) {
       this.Y -= REDUCED_SPEED_AI
     } else if ((this.Y + SIZE_PADDLE / 2) < window.game.ball.Y) {
@@ -70,13 +70,13 @@ export default class Paddle {
    * @param {number} intersectY Y position where the ball hit, in pixels.
    * @returns {number} Bounce angle in radians.
    */
-  getBounceAngle(intersectY) {
+  getBounceAngle = (intersectY) => {
     const relativeIntersection = this.Y + (SIZE_PADDLE / 2) - intersectY
     return (relativeIntersection / (SIZE_PADDLE / 2)) * MAX_BOUNCE_ANGLE
   }
 
   /** Clamps the paddle inside the playfield's top and bottom edges. */
-  checkCollisionWithWall() {
+  checkCollisionWithWall = () => {
     if (this.Y <= 0) {
       this.Y = 0
     } else if (this.Y + SIZE_PADDLE >= window.game.height) {
@@ -85,7 +85,7 @@ export default class Paddle {
   }
 
   /** Places the paddle against its side of the playfield, vertically centered, and resets its score. */
-  init() {
+  init = () => {
     if (this.position === POSITION.RIGHT) {
       this.X = window.game.width - THICKNESS_PADDLE
       this.Y = window.game.height / 2
