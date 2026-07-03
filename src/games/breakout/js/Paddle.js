@@ -1,6 +1,6 @@
-import Keyboard, { Keys } from '../../../common/Keyboard.js'
+import Keyboard from '../../../common/Keyboard.js'
 import {
-  MAX_BOUNCE_ANGLE, PADDLE_COLOR, SIZE_PADDLE, SPEED_PADDLE, THICKNESS_PADDLE,
+  CONTROLS, MAX_BOUNCE_ANGLE, PADDLE_COLOR, SIZE_PADDLE, SPEED_PADDLE, THICKNESS_PADDLE,
 } from './globalVariables.js'
 
 /**
@@ -32,9 +32,9 @@ export default class Paddle {
 
   /** Moves left/right while the corresponding arrow key is held. */
   checkInput() {
-    if (Keyboard.isDown(Keys.ARROW_LEFT)) {
+    if (Keyboard.isDown(CONTROLS.left)) {
       this.X -= SPEED_PADDLE
-    } else if (Keyboard.isDown(Keys.ARROW_RIGHT)) {
+    } else if (Keyboard.isDown(CONTROLS.right)) {
       this.X += SPEED_PADDLE
     }
   }

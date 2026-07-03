@@ -1,3 +1,11 @@
+import { Keys } from '../../../common/Keyboard.js'
+
+/** Maps the paddle's movement actions to the physical keys that trigger them. */
+export const CONTROLS = {
+  left: Keys.ARROW_LEFT,
+  right: Keys.ARROW_RIGHT,
+}
+
 /** Ball radius in pixels. */
 export const BALL_RADIUS = 5
 

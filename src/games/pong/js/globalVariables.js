@@ -1,3 +1,5 @@
+import { Keys } from '../../../common/Keyboard.js'
+
 /**
  * Playfield sides, used both for paddle placement and for which wall the ball went out on.
  * @enum {string}
@@ -15,6 +17,18 @@ export const PLAYER_TYPE = {
   HUMAN: 'Human',
   HUMAN2: 'Human2',
   AI: 'AI',
+}
+
+/** Maps each human player type's movement actions to the physical keys that trigger them. */
+export const CONTROLS = {
+  [PLAYER_TYPE.HUMAN]: {
+    up: Keys.ARROW_UP,
+    down: Keys.ARROW_DOWN,
+  },
+  [PLAYER_TYPE.HUMAN2]: {
+    up: Keys.W,
+    down: Keys.S,
+  },
 }
 
 /** Ball radius in pixels. */

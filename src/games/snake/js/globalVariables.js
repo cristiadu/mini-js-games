@@ -1,3 +1,13 @@
+import { Keys } from '../../../common/Keyboard.js'
+
+/** Maps the snake's movement actions to the physical keys that trigger them. */
+export const CONTROLS = {
+  left: Keys.ARROW_LEFT,
+  up: Keys.ARROW_UP,
+  right: Keys.ARROW_RIGHT,
+  down: Keys.ARROW_DOWN,
+}
+
 /**
  * Travel directions for the head and body segments.
  * @enum {string}
