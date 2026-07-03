@@ -1,11 +1,22 @@
 import Keyboard from './Keyboard.js'
 
+/** KeyboardEvent.code that toggles pause in every game. */
 const PAUSE_KEY = 'KeyP'
+
+/** KeyboardEvent.code that restarts a finished game. */
 const RESTART_KEY = 'Escape'
 
+/** Semi-transparent dim drawn over the frozen frame while paused or game over. */
 const OVERLAY_BACKGROUND_COLOR = 'rgba(0, 0, 0, 0.6)'
+
+/** Color of the overlay title and subtitle text. */
 const OVERLAY_TEXT_COLOR = '#FFF'
 
+/**
+ * Lifecycle states of the machine. Updates only run while PLAYING;
+ * PAUSED and GAME_OVER keep drawing the frozen frame under an overlay.
+ * @enum {number}
+ */
 const STATES = {
   PLAYING: 0,
   STOPPED: 1,
@@ -13,7 +24,33 @@ const STATES = {
   GAME_OVER: 3,
 }
 
+/**
+ * A game the machine can run. Any class with this shape works.
+ *
+ * @typedef {Object} Game
+ * @property {function(): void} update Advances game logic by one fixed step (input, movement, collisions).
+ * @property {function(CanvasRenderingContext2D, number): void} draw Renders the current state; receives the 2D context
+ *   and the accumulator remainder (ms not yet consumed by fixed steps).
+ * @property {function(): void} init Positions/resets all entities; called before the loop starts and on every restart.
+ * @property {GameMachine} [machine] Back-reference set by the machine on construction.
+ */
+
+/**
+ * Fixed-timestep game loop on top of requestAnimationFrame.
+ *
+ * Each frame it accumulates elapsed wall-clock time and calls game.update()
+ * once per fixed step (1000 / fps ms) until the accumulator drains, so game
+ * logic advances at a constant rate regardless of frame rate. It also owns the
+ * cross-game state flow: pause toggling, the game-over screen, and ESC restart.
+ */
 export default class GameMachine {
+  /**
+   * Wires the machine to a game and a canvas and prepares (but does not start) the loop.
+   *
+   * @param {Game} game The game instance to drive; receives a `machine` back-reference.
+   * @param {{width: number, height: number, fps?: number}} cfg Canvas size and optional fixed update rate (default 60).
+   * @param {string} selector CSS selector for the target <canvas> element.
+   */
   constructor(game, cfg, selector) {
     this.game = game
     this.game.machine = this
@@ -35,6 +72,11 @@ export default class GameMachine {
     this.gameCanvas.width = cfg.width
     this.gameCanvas.height = cfg.height
 
+    /**
+     * Runs one frame: handles pause/restart input, drains the accumulator
+     * through game.update() while PLAYING, draws the game and any overlay,
+     * and schedules the next frame.
+     */
     this.step = () => {
       this.now = performance.now()
       this.elapsed = this.now - this.last
@@ -66,19 +108,25 @@ export default class GameMachine {
     }
   }
 
+  /** Enters the PLAYING state and kicks off the frame loop. */
   start = () => {
     this.state = STATES.PLAYING
     this.last = performance.now()
     this.step()
   }
 
-  // Ends the current round; the machine freezes updates, shows the message
-  // overlay, and restarts the game (via game.init()) when ESC is pressed.
+  /**
+   * Ends the current round; the machine freezes updates, shows the message
+   * overlay, and restarts the game (via game.init()) when ESC is pressed.
+   *
+   * @param {string} message Overlay title, e.g. 'Game Over' or 'You won!'.
+   */
   gameOver(message) {
     this.gameOverMessage = message
     this.state = STATES.GAME_OVER
   }
 
+  /** Resets the game through game.init() and resumes playing. */
   restart() {
     this.gameOverMessage = ''
     this.accumulator = 0
@@ -86,6 +134,10 @@ export default class GameMachine {
     this.state = STATES.PLAYING
   }
 
+  /**
+   * Polls the pause and restart keys once per frame. The pause key is
+   * edge-detected so holding it down toggles only once.
+   */
   handleStateInput() {
     const pauseKeyIsDown = Keyboard.isDown(PAUSE_KEY)
     if (pauseKeyIsDown && !this.pauseKeyWasDown) {
@@ -102,6 +154,12 @@ export default class GameMachine {
     }
   }
 
+  /**
+   * Dims the whole canvas and centers a title with a smaller subtitle under it.
+   *
+   * @param {string} title Large overlay headline.
+   * @param {string} subtitle Hint line rendered below the title.
+   */
   drawOverlay(title, subtitle) {
     const ctx = this.context
     ctx.save()

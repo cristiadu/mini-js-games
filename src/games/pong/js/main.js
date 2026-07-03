@@ -1,6 +1,11 @@
+/**
+ * Pong entry point: builds the game and its GameMachine, exposes both as
+ * globals (entities reach the game via window.game), and starts the loop.
+ */
 import GameMachine from '../../../common/GameMachine.js'
 import PongGame from './PongGame.js'
 
+/** Canvas size and fixed update rate for this game. */
 const cfg = {
   width: 1000,
   height: 800,

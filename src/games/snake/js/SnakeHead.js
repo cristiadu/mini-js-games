@@ -3,7 +3,13 @@ import {
   DIRECTION, FOOD_SIZE, SIZE_SNAKE, SNAKE_HEAD_COLOR, SNAKE_INITIAL_X, SNAKE_INITIAL_Y,
 } from './globalVariables.js'
 
+/**
+ * The snake's head: moves one cell per update in the current direction,
+ * eats food, and detects self/wall collisions. The rest of the snake hangs
+ * off it as a linked list of SnakeBody segments (via this.body).
+ */
 export default class SnakeHead {
+  /** Creates a head at the starting cell, moving right; call init() to attach the body. */
   constructor() {
     this.body = null
     this.direction = DIRECTION.RIGHT
@@ -12,6 +18,10 @@ export default class SnakeHead {
     this.Y = SNAKE_INITIAL_Y
   }
 
+  /**
+   * Advances one cell in the current direction, grows and respawns the food if
+   * eating, propagates movement down the body, then checks collisions.
+   */
   update() {
     switch (this.direction) {
       case DIRECTION.RIGHT:
@@ -42,12 +52,18 @@ export default class SnakeHead {
     this.checkWallCollision()
   }
 
+  /**
+   * Renders the head and, recursively, every body segment.
+   *
+   * @param {CanvasRenderingContext2D} ctx Canvas 2D context.
+   */
   draw(ctx) {
     ctx.fillStyle = SNAKE_HEAD_COLOR
     ctx.fillRect(this.X, this.Y, SIZE_SNAKE, SIZE_SNAKE)
     this.body.draw(ctx)
   }
 
+  /** Resets position/direction and rebuilds the body at its starting length. */
   init() {
     this.X = SNAKE_INITIAL_X
     this.Y = SNAKE_INITIAL_Y
@@ -59,6 +75,7 @@ export default class SnakeHead {
     this.body.increase()
   }
 
+  /** Ends the game if the head overlaps any body segment. */
   checkBodyCollision() {
     let part = this.body
     while (part != null) {
@@ -70,17 +87,28 @@ export default class SnakeHead {
     }
   }
 
+  /** Ends the game if the head has left the playfield. */
   checkWallCollision() {
     if (this.X < 0 || this.Y < 0 || this.X + SIZE_SNAKE > window.game.width || this.Y + SIZE_SNAKE > window.game.height) {
       window.game.gameIsOver()
     }
   }
 
+  /**
+   * Turns the head, remembering the previous direction for the body to follow.
+   *
+   * @param {string} updatedDirection One of the DIRECTION values.
+   */
   changeDirection(updatedDirection) {
     this.lastDirection = this.direction
     this.direction = updatedDirection
   }
 
+  /**
+   * Reports whether the head currently overlaps the food.
+   *
+   * @returns {boolean} True when the head and food rectangles intersect.
+   */
   isEatingFood() {
     if (this.X < window.game.food.X + FOOD_SIZE && this.X + SIZE_SNAKE > window.game.food.X
       && this.Y < window.game.food.Y + FOOD_SIZE && SIZE_SNAKE + this.Y > window.game.food.Y) {
