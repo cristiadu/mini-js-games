@@ -17,7 +17,7 @@ export default class Ball {
   }
 
   /** Advances one step along the velocity vector and bounces off the side walls. */
-  update() {
+  update = () => {
     this.X += this.vX
     this.Y += this.vY
     this.checkCollisionWithVerticalWall()
@@ -28,7 +28,7 @@ export default class Ball {
    *
    * @param {CanvasRenderingContext2D} ctx Canvas 2D context.
    */
-  draw(ctx) {
+  draw = (ctx) => {
     ctx.fillStyle = BALL_COLOR
     ctx.beginPath()
     ctx.arc(this.X, this.Y, this.radius, 0, 2 * Math.PI)
@@ -42,7 +42,7 @@ export default class Ball {
    *
    * @param {boolean} collide True when the ball hit the paddle or a block this step.
    */
-  checkCollisionWithHorizontalWall(collide) {
+  checkCollisionWithHorizontalWall = (collide) => {
     if (!collide) {
       if (this.Y - this.radius <= 0) {
         this.vY = -this.vY
@@ -54,7 +54,7 @@ export default class Ball {
   }
 
   /** Reverses horizontal direction when touching the left or right wall. */
-  checkCollisionWithVerticalWall() {
+  checkCollisionWithVerticalWall = () => {
     if (((this.X - this.radius) <= 0) || ((this.X + this.radius) >= window.game.width)) {
       this.vX = -this.vX
     }
@@ -66,7 +66,7 @@ export default class Ball {
    *
    * @param {number} bounceAngle Angle in radians, negative-to-positive across the surface's width.
    */
-  changeDirection(bounceAngle) {
+  changeDirection = (bounceAngle) => {
     if (this.vY < 0) {
       this.vY = -(this.vY + (-0.20) * Math.abs(Math.cos(bounceAngle)))
       this.vX += (1.00) * (-Math.sin(bounceAngle))
@@ -83,7 +83,7 @@ export default class Ball {
    * @param {number} initialX Starting X position in pixels.
    * @param {number} initialY Starting Y position in pixels.
    */
-  init(initialX, initialY) {
+  init = (initialX, initialY) => {
     this.initialX = initialX
     this.initialY = initialY
     this.X = initialX

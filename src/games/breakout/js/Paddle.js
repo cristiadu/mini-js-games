@@ -15,7 +15,7 @@ export default class Paddle {
   }
 
   /** Advances one step: applies input, then clamps to the playfield. */
-  update() {
+  update = () => {
     this.checkInput()
     this.checkCollisionWithWall()
   }
@@ -25,13 +25,13 @@ export default class Paddle {
    *
    * @param {CanvasRenderingContext2D} ctx Canvas 2D context.
    */
-  draw(ctx) {
+  draw = (ctx) => {
     ctx.fillStyle = PADDLE_COLOR
     ctx.fillRect(this.X, this.Y, SIZE_PADDLE, THICKNESS_PADDLE)
   }
 
   /** Moves left/right while the corresponding arrow key is held. */
-  checkInput() {
+  checkInput = () => {
     if (Keyboard.isDown(Keys.ARROW_LEFT)) {
       this.X -= SPEED_PADDLE
     } else if (Keyboard.isDown(Keys.ARROW_RIGHT)) {
@@ -46,13 +46,13 @@ export default class Paddle {
    * @param {number} intersectX X position where the ball hit, in pixels.
    * @returns {number} Bounce angle in radians.
    */
-  getBounceAngle(intersectX) {
+  getBounceAngle = (intersectX) => {
     const relativeIntersection = this.X + (SIZE_PADDLE / 2) - intersectX
     return (relativeIntersection / (SIZE_PADDLE / 2)) * MAX_BOUNCE_ANGLE
   }
 
   /** Clamps the paddle inside the playfield's left and right edges. */
-  checkCollisionWithWall() {
+  checkCollisionWithWall = () => {
     if (this.X <= 0) {
       this.X = 0
     } else if (this.X + SIZE_PADDLE >= window.game.width) {
@@ -66,7 +66,7 @@ export default class Paddle {
    * @param {number} initialX Starting X position in pixels.
    * @param {number} initialY Starting Y position in pixels.
    */
-  init(initialX, initialY) {
+  init = (initialX, initialY) => {
     this.X = initialX
     this.Y = initialY
   }

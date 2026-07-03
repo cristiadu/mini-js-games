@@ -23,7 +23,7 @@ export default class SnakeBody {
   }
 
   /** Moves one cell in the predecessor's previous direction, then updates the next segment. */
-  update() {
+  update = () => {
     // Next element will get direction from before the update
     this.lastDirection = this.direction
     this.direction = this.prev.lastDirection
@@ -56,7 +56,7 @@ export default class SnakeBody {
    *
    * @param {CanvasRenderingContext2D} ctx Canvas 2D context.
    */
-  draw(ctx) {
+  draw = (ctx) => {
     ctx.fillStyle = SNAKE_BODY_COLOR
     ctx.fillRect(this.X, this.Y, SIZE_SNAKE, SIZE_SNAKE)
     if (this.next != null) {
@@ -65,7 +65,7 @@ export default class SnakeBody {
   }
 
   /** Appends one segment at the tail, placed one cell behind the last segment's direction of travel. */
-  increase() {
+  increase = () => {
     if (this.next != null) {
       this.next.increase()
     } else {

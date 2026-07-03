@@ -21,7 +21,7 @@ export default class Block {
    *
    * @param {CanvasRenderingContext2D} ctx Canvas 2D context.
    */
-  draw(ctx) {
+  draw = (ctx) => {
     if (this.show) {
       ctx.fillStyle = this.color
       ctx.fillRect(this.X, this.Y, SIZE_BLOCK, THICKNESS_BLOCK)
@@ -38,7 +38,7 @@ export default class Block {
    * @param {number} intersectX X position where the ball hit, in pixels.
    * @returns {number} Bounce angle in radians.
    */
-  getBounceAngle(intersectX) {
+  getBounceAngle = (intersectX) => {
     const relativeIntersection = this.X + (SIZE_BLOCK / 2) - intersectX
     return (relativeIntersection / (SIZE_BLOCK / 2)) * MAX_BOUNCE_ANGLE
   }
@@ -49,7 +49,7 @@ export default class Block {
    * @param {number} line Zero-based row index from the top.
    * @param {number} collumn Zero-based column index from the left.
    */
-  init(line, collumn) {
+  init = (line, collumn) => {
     this.Y = line * THICKNESS_BLOCK
     this.X = collumn * SIZE_BLOCK
   }

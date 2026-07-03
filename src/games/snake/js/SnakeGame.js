@@ -22,7 +22,7 @@ export default class SnakeGame {
   }
 
   /** Advances one fixed step: applies input, then moves the food timer and the snake. */
-  update() {
+  update = () => {
     this.checkInput()
     this.food.update()
     this.snake.update()
@@ -35,7 +35,7 @@ export default class SnakeGame {
    * @param {CanvasRenderingContext2D} ctx Canvas 2D context.
    * @param {number} dt Accumulator remainder in ms (unused).
    */
-  draw(ctx, dt) {
+  draw = (ctx, dt) => {
     ctx.fillStyle = SCREEN_BACKGROUND_COLOR
     ctx.fillRect(0, 0, this.width, this.height)
     this.food.draw(ctx)
@@ -44,7 +44,7 @@ export default class SnakeGame {
   /* eslint-enable no-unused-vars */
 
   /** Polls the arrow keys and turns the snake, disallowing 180-degree reversals. */
-  checkInput() {
+  checkInput = () => {
     let direction = null
     if (Keyboard.isDown(Keys.ARROW_LEFT) && (this.snake.direction !== DIRECTION.RIGHT)) {
       direction = DIRECTION.LEFT
@@ -62,13 +62,13 @@ export default class SnakeGame {
   }
 
   /** Resets the snake to its starting position/length and spawns fresh food. */
-  init() {
+  init = () => {
     this.snake.init()
     this.food.init()
   }
 
   /** Ends the round; the machine shows the game-over overlay and handles restart. */
-  gameIsOver() {
+  gameIsOver = () => {
     this.machine.gameOver('Game Over')
   }
 }

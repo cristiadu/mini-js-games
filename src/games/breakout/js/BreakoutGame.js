@@ -31,7 +31,7 @@ export default class BreakoutGame {
    * and ends the round through the machine on a win (no blocks left) or loss
    * (no lives left).
    */
-  update() {
+  update = () => {
     this.ball.update()
     this.playerPaddle.update()
     const collidesPaddle = this.checkCollisionBallwithPaddle()
@@ -52,7 +52,7 @@ export default class BreakoutGame {
    * @param {CanvasRenderingContext2D} ctx Canvas 2D context.
    * @param {number} dt Accumulator remainder in ms (unused).
    */
-  draw(ctx, dt) {
+  draw = (ctx, dt) => {
     ctx.fillStyle = SCREEN_BACKGROUND_COLOR
     ctx.fillRect(0, 0, this.width, this.height)
 
@@ -70,7 +70,7 @@ export default class BreakoutGame {
    *
    * @returns {boolean} True when the ball hit the paddle this step.
    */
-  checkCollisionBallwithPaddle() {
+  checkCollisionBallwithPaddle = () => {
     let collides = false
 
     if (((this.ball.Y + this.ball.radius) >= this.playerPaddle.Y) && (this.playerPaddle.X <= this.ball.X)
@@ -89,7 +89,7 @@ export default class BreakoutGame {
    *
    * @returns {boolean} True when the ball hit a block this step.
    */
-  checkCollisionBallwithBlock() {
+  checkCollisionBallwithBlock = () => {
     let collides = false
 
     for (const block of this.blocks) {
@@ -113,7 +113,7 @@ export default class BreakoutGame {
   }
 
   /** Resets the paddle, ball and lives, and rebuilds the full block grid (also runs on restart). */
-  init() {
+  init = () => {
     const paddleInitialX = window.game.width / 2
     const paddleInitialY = window.game.height - THICKNESS_PADDLE - 10
     this.playerPaddle.init(paddleInitialX, paddleInitialY)
