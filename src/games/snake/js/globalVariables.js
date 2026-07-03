@@ -1,9 +1,11 @@
-/** KeyboardEvent.code values for the movement keys. */
-export const ARROW_KEYS = {
-  left: 'ArrowLeft',
-  up: 'ArrowUp',
-  right: 'ArrowRight',
-  down: 'ArrowDown',
+import { Keys } from '../../../common/Keyboard.js'
+
+/** Maps the snake's movement actions to the physical keys that trigger them. */
+export const CONTROLS = {
+  left: Keys.ARROW_LEFT,
+  up: Keys.ARROW_UP,
+  right: Keys.ARROW_RIGHT,
+  down: Keys.ARROW_DOWN,
 }
 
 /**
