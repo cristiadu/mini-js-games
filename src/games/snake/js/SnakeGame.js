@@ -1,7 +1,7 @@
-import Keyboard, { Keys } from '../../../common/Keyboard.js'
+import Keyboard from '../../../common/Keyboard.js'
 import Food from './Food.js'
 import SnakeHead from './SnakeHead.js'
-import { DIRECTION, SCREEN_BACKGROUND_COLOR } from './globalVariables.js'
+import { CONTROLS, DIRECTION, SCREEN_BACKGROUND_COLOR } from './globalVariables.js'
 
 /**
  * Arrow-key snake: eat food to grow, die on self or wall collision.
@@ -46,13 +46,13 @@ export default class SnakeGame {
   /** Polls the arrow keys and turns the snake, disallowing 180-degree reversals. */
   checkInput = () => {
     let direction = null
-    if (Keyboard.isDown(Keys.ARROW_LEFT) && (this.snake.direction !== DIRECTION.RIGHT)) {
+    if (Keyboard.isDown(CONTROLS.left) && (this.snake.direction !== DIRECTION.RIGHT)) {
       direction = DIRECTION.LEFT
-    } else if (Keyboard.isDown(Keys.ARROW_RIGHT) && (this.snake.direction !== DIRECTION.LEFT)) {
+    } else if (Keyboard.isDown(CONTROLS.right) && (this.snake.direction !== DIRECTION.LEFT)) {
       direction = DIRECTION.RIGHT
-    } else if (Keyboard.isDown(Keys.ARROW_DOWN) && (this.snake.direction !== DIRECTION.UP)) {
+    } else if (Keyboard.isDown(CONTROLS.down) && (this.snake.direction !== DIRECTION.UP)) {
       direction = DIRECTION.DOWN
-    } else if (Keyboard.isDown(Keys.ARROW_UP) && (this.snake.direction !== DIRECTION.DOWN)) {
+    } else if (Keyboard.isDown(CONTROLS.up) && (this.snake.direction !== DIRECTION.DOWN)) {
       direction = DIRECTION.UP
     }
 
