@@ -46,7 +46,7 @@ A game is any class implementing this contract:
 
 ### `Keyboard.js` — input
 
-A keydown/keyup listener that records pressed keys in a static map, keyed by `KeyboardEvent.code` (e.g. `'ArrowLeft'`, `'KeyW'`). It self-registers a global singleton on load (`window.GameKeyboard`); games poll input inside `update()` via `Keyboard.isDown(code)`.
+A keydown/keyup listener that records pressed keys in a static map, keyed by `KeyboardEvent.code` (e.g. `'ArrowLeft'`, `'KeyW'`). It self-registers a global singleton on load (`window.GameKeyboard`); games poll input inside `update()` via `Keyboard.isDown(code)`. It also exports the `KEY` enum holding every key code the project uses — games reference `KEY.ARROW_LEFT` etc. instead of hardcoding code strings.
 
 ## Games
 
@@ -64,7 +64,7 @@ src/games/<name>/
 └── js/
     ├── main.js           # entry: builds the game + GameMachine, calls init() and start()
     ├── <Name>Game.js     # the game class (update/draw/init) and collision logic
-    ├── globalVariables.js# exported constants: key codes, sizes, speeds, colors
+    ├── globalVariables.js# exported constants: sizes, speeds, colors (keys come from the engine's KEY enum)
     └── *.js              # entity classes (Ball, Paddle, Block, SnakeHead, Food, ...)
 ```
 

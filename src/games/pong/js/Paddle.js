@@ -1,6 +1,6 @@
-import Keyboard from '../../../common/Keyboard.js'
+import Keyboard, { KEY } from '../../../common/Keyboard.js'
 import {
-  KEYS, MAX_BOUNCE_ANGLE, PADDLE_COLOR, PLAYER_TYPE, POSITION, REDUCED_SPEED_AI, SIZE_PADDLE, SPEED_PADDLE, THICKNESS_PADDLE,
+  MAX_BOUNCE_ANGLE, PADDLE_COLOR, PLAYER_TYPE, POSITION, REDUCED_SPEED_AI, SIZE_PADDLE, SPEED_PADDLE, THICKNESS_PADDLE,
 } from './globalVariables.js'
 
 /**
@@ -47,15 +47,15 @@ export default class Paddle {
   /** Moves up/down from keyboard input: arrows for HUMAN, W/S for HUMAN2. */
   checkInput() {
     if (this.playerType === PLAYER_TYPE.HUMAN) {
-      if (Keyboard.isDown(KEYS.down)) {
+      if (Keyboard.isDown(KEY.ARROW_DOWN)) {
         this.Y += SPEED_PADDLE
-      } else if (Keyboard.isDown(KEYS.up)) {
+      } else if (Keyboard.isDown(KEY.ARROW_UP)) {
         this.Y -= SPEED_PADDLE
       }
     } else if (this.playerType === PLAYER_TYPE.HUMAN2) {
-      if (Keyboard.isDown(KEYS.w)) {
+      if (Keyboard.isDown(KEY.W)) {
         this.Y -= SPEED_PADDLE
-      } else if (Keyboard.isDown(KEYS.s)) {
+      } else if (Keyboard.isDown(KEY.S)) {
         this.Y += SPEED_PADDLE
       }
     }

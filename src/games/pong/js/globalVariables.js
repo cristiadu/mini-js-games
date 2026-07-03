@@ -1,11 +1,3 @@
-/** KeyboardEvent.code values for the paddle movement keys. */
-export const KEYS = {
-  up: 'ArrowUp',
-  down: 'ArrowDown',
-  w: 'KeyW',
-  s: 'KeyS',
-}
-
 /**
  * Playfield sides, used both for paddle placement and for which wall the ball went out on.
  * @enum {string}

@@ -1,9 +1,3 @@
-/** KeyboardEvent.code values for the paddle movement keys. */
-export const KEYS = {
-  left: 'ArrowLeft',
-  right: 'ArrowRight',
-}
-
 /** Ball radius in pixels. */
 export const BALL_RADIUS = 5
 

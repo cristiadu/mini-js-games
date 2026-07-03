@@ -1,11 +1,3 @@
-/** KeyboardEvent.code values for the movement keys. */
-export const ARROW_KEYS = {
-  left: 'ArrowLeft',
-  up: 'ArrowUp',
-  right: 'ArrowRight',
-  down: 'ArrowDown',
-}
-
 /**
  * Travel directions for the head and body segments.
  * @enum {string}
