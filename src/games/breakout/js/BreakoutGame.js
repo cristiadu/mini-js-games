@@ -2,12 +2,15 @@ import Ball from './Ball.js'
 import Block from './Block.js'
 import Paddle from './Paddle.js'
 import {
-  NUM_LINES_BLOCKS, SIZE_PADDLE, SIZE_BLOCK, THICKNESS_BLOCK, THICKNESS_PADDLE, SCREEN_BACKGROUND_COLOR, GAME_LIVES,
+  NUM_LEVELS, NUM_LINES_BLOCKS, SIZE_PADDLE, SIZE_BLOCK, TEXT_COLOR, THICKNESS_BLOCK, THICKNESS_PADDLE,
+  SCREEN_BACKGROUND_COLOR, GAME_LIVES,
 } from './globalVariables.js'
 
 /**
  * Breakout: bounce the ball off the paddle to clear the block grid before
- * running out of lives. Implements the GameMachine contract (update/draw/init).
+ * running out of lives. Clearing a grid advances to the next level, which
+ * adds one row of blocks; clearing the last level wins the game.
+ * Implements the GameMachine contract (update/draw/init).
  */
 export default class BreakoutGame {
   /**
@@ -24,12 +27,14 @@ export default class BreakoutGame {
     this.blocks = []
     this.lives = GAME_LIVES
     this.activeBlocks = 0
+    this.level = 1
   }
 
   /**
    * Advances one fixed step: moves the ball and paddle, resolves collisions,
-   * and ends the round through the machine on a win (no blocks left) or loss
-   * (no lives left).
+   * and ends the round through the machine on a loss (no lives left). When a
+   * grid is cleared it advances to the next level, or wins the game after the
+   * last one.
    */
   update = () => {
     this.ball.update()
@@ -39,7 +44,12 @@ export default class BreakoutGame {
     this.ball.checkCollisionWithHorizontalWall(collidesPaddle || collidesBlock)
 
     if (this.activeBlocks <= 0) {
-      this.machine.gameOver('You won!')
+      if (this.level < NUM_LEVELS) {
+        this.level += 1
+        this.startLevel()
+      } else {
+        this.machine.gameOver('You won!')
+      }
     } else if (this.lives <= 0) {
       this.machine.gameOver('You lost!')
     }
@@ -47,7 +57,8 @@ export default class BreakoutGame {
 
   /* eslint-disable no-unused-vars */
   /**
-   * Clears the playfield and renders the ball, paddle and remaining blocks.
+   * Clears the playfield and renders the ball, paddle, remaining blocks and
+   * the level/lives HUD line.
    *
    * @param {CanvasRenderingContext2D} ctx Canvas 2D context.
    * @param {number} dt Accumulator remainder in ms (unused).
@@ -62,6 +73,10 @@ export default class BreakoutGame {
     this.blocks.forEach((block) => {
       block.draw(ctx)
     })
+
+    ctx.fillStyle = TEXT_COLOR
+    ctx.font = '20px monospace'
+    ctx.fillText(`Level ${this.level}/${NUM_LEVELS}  Lives ${this.lives}`, 12, this.height - 12)
   }
   /* eslint-enable no-unused-vars */
 
@@ -119,26 +134,35 @@ export default class BreakoutGame {
     return collides
   }
 
-  /** Resets the paddle, ball and lives, and rebuilds the full block grid (also runs on restart). */
+  /**
+   * Builds the current level's block grid — the base number of rows plus one
+   * per level past the first — and re-centers the ball for the serve.
+   */
+  startLevel = () => {
+    const rows = NUM_LINES_BLOCKS + this.level - 1
+    const columns = window.game.width / SIZE_BLOCK
+
+    this.blocks = []
+    for (let i = 0; i < rows; i += 1) {
+      for (let j = 0; j < columns; j += 1) {
+        const block = new Block()
+        block.init(i, j)
+        this.blocks.push(block)
+      }
+    }
+
+    this.activeBlocks = rows * columns
+    this.ball.init(window.game.width / 2, window.game.height / 2)
+  }
+
+  /** Resets the paddle, lives and level, and builds the first level's block grid (also runs on restart). */
   init = () => {
     const paddleInitialX = (window.game.width - SIZE_PADDLE) / 2
     const paddleInitialY = window.game.height - THICKNESS_PADDLE - 10
     this.playerPaddle.init(paddleInitialX, paddleInitialY)
 
-    const ballInitialX = window.game.width / 2
-    const ballInitialY = window.game.height / 2
-    this.ball.init(ballInitialX, ballInitialY)
-
     this.lives = GAME_LIVES
-
-    this.blocks = []
-    for (let i = 0; i < NUM_LINES_BLOCKS; i += 1) {
-      for (let j = 0; j < window.game.width / SIZE_BLOCK; j += 1) {
-        this.blocks.push(new Block())
-        this.blocks[i * (window.game.width / SIZE_BLOCK) + j].init(i, j)
-      }
-    }
-
-    this.activeBlocks = NUM_LINES_BLOCKS * (window.game.width / SIZE_BLOCK)
+    this.level = 1
+    this.startLevel()
   }
 }

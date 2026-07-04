@@ -1,10 +1,13 @@
 import Keyboard from '../../../common/Keyboard.js'
 import Food from './Food.js'
 import SnakeHead from './SnakeHead.js'
-import { CONTROLS, DIRECTION, SCREEN_BACKGROUND_COLOR } from './globalVariables.js'
+import {
+  CONTROLS, DIRECTION, SCREEN_BACKGROUND_COLOR, WIN_LENGTH,
+} from './globalVariables.js'
 
 /**
- * Arrow-key snake: eat food to grow, die on self or wall collision.
+ * Arrow-key snake: eat food to grow, die on self or wall collision, win by
+ * reaching WIN_LENGTH segments.
  * Implements the GameMachine contract (update/draw/init).
  */
 export default class SnakeGame {
@@ -21,11 +24,32 @@ export default class SnakeGame {
     this.food = new Food()
   }
 
-  /** Advances one fixed step: applies input, then moves the food timer and the snake. */
+  /** Advances one fixed step: applies input, moves the food timer and the snake, then checks for the win. */
   update = () => {
     this.checkInput()
     this.food.update()
     this.snake.update()
+    this.checkWin()
+  }
+
+  /**
+   * Ends the round with a win once the snake has reached the winning length.
+   * Skipped when the round already ended this step (dying takes precedence
+   * over growing on the same move).
+   */
+  checkWin = () => {
+    if (this.machine.gameOverMessage !== '') {
+      return
+    }
+
+    let length = 1
+    for (let part = this.snake.body; part != null; part = part.next) {
+      length += 1
+    }
+
+    if (length >= WIN_LENGTH) {
+      this.machine.gameOver('You won!')
+    }
   }
 
   /* eslint-disable no-unused-vars */
