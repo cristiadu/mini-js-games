@@ -55,23 +55,29 @@ export default class PongGame {
   /* eslint-enable no-unused-vars */
 
   /**
-   * Bounces the ball off whichever paddle it intersects, using that paddle's
-   * own position to derive the rebound angle.
+   * Bounces the ball off whichever paddle it intersects while moving toward
+   * it, using that paddle's own position to derive the rebound angle, then
+   * rests the ball on the paddle's face so it cannot collide again on the
+   * next step.
    *
    * @returns {boolean} True when the ball hit a paddle this step.
    */
   checkCollisionBallwithPaddle = () => {
     let collides = false
 
-    if (((this.ball.X + this.ball.radius) >= this.player2Paddle.X) && (this.player2Paddle.Y <= this.ball.Y)
+    if ((this.ball.vX > 0)
+      && ((this.ball.X + this.ball.radius) >= this.player2Paddle.X) && (this.player2Paddle.Y <= this.ball.Y)
       && ((this.player2Paddle.Y + SIZE_PADDLE) >= this.ball.Y)) {
       const bounceAngle = this.player2Paddle.getBounceAngle(this.ball.Y)
       this.ball.changeDirection(bounceAngle)
+      this.ball.X = this.player2Paddle.X - this.ball.radius
       collides = true
-    } else if (((this.ball.X - this.ball.radius) <= (this.player1Paddle.X + THICKNESS_PADDLE))
+    } else if ((this.ball.vX < 0)
+      && ((this.ball.X - this.ball.radius) <= (this.player1Paddle.X + THICKNESS_PADDLE))
       && (this.player1Paddle.Y <= this.ball.Y) && ((this.player1Paddle.Y + SIZE_PADDLE) >= this.ball.Y)) {
       const bounceAngle = this.player1Paddle.getBounceAngle(this.ball.Y)
       this.ball.changeDirection(bounceAngle)
+      this.ball.X = this.player1Paddle.X + THICKNESS_PADDLE + this.ball.radius
       collides = true
     }
 

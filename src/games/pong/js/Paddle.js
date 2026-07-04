@@ -98,12 +98,11 @@ export default class Paddle {
   init = () => {
     if (this.position === POSITION.RIGHT) {
       this.X = window.game.width - THICKNESS_PADDLE
-      this.Y = window.game.height / 2
     } else if (this.position === POSITION.LEFT) {
       this.X = 0
-      this.Y = window.game.height / 2
     }
 
+    this.Y = (window.game.height - SIZE_PADDLE) / 2
     this.points = 0
   }
 }
