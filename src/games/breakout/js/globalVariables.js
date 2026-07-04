@@ -27,11 +27,17 @@ export const THICKNESS_BLOCK = 30
 /** Block width in pixels. */
 export const SIZE_BLOCK = 100
 
-/** Number of block rows in the grid. */
+/** Number of block rows in the grid on the first level; each later level adds one row. */
 export const NUM_LINES_BLOCKS = 5
+
+/** Number of levels to clear before the game is won. */
+export const NUM_LEVELS = 3
 
 /** Lives the player starts a round with. */
 export const GAME_LIVES = 3
+
+/** HUD text color for the level and lives display. */
+export const TEXT_COLOR = '#FFF'
 
 /** Ball fill color. */
 export const BALL_COLOR = '#E7F9A9'

@@ -53,7 +53,7 @@ A keydown/keyup listener that records pressed keys in a static map, keyed by `Ke
 | Game | Path | Notes |
 |------|------|-------|
 | Snake | `src/games/snake/` | Arrow-key snake; eat food, grow, die on self/wall collision |
-| Breakout | `src/games/breakout/` | Paddle + ball; clear the block grid |
+| Breakout | `src/games/breakout/` | Paddle + ball; clear the block grid on each of 3 levels (each adds a row) to win |
 | Pong | `src/games/pong/` | Human (W/S or arrows) vs. simple AI paddle |
 
 Every game follows the same layout:
