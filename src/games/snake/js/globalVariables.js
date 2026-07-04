@@ -34,8 +34,20 @@ export const SNAKE_INITIAL_X = SIZE_SNAKE * 2
 /** Head starting Y position in pixels: aligned to the same grid as the X position. */
 export const SNAKE_INITIAL_Y = SIZE_SNAKE * 2
 
-/** Food pellet fill color. */
-export const FOOD_COLOR = '#EB9486'
+/**
+ * The food varieties a pellet can spawn as: color tells them apart on
+ * screen, growth is how many segments eating one adds, and weight is the
+ * variety's relative spawn chance (7:2:1).
+ * @enum {{color: string, growth: number, weight: number}}
+ */
+export const FOOD_TYPES = {
+  REGULAR: { color: '#EB9486', growth: 1, weight: 7 },
+  BONUS: { color: '#6EA4BF', growth: 2, weight: 2 },
+  GOLDEN: { color: '#FFD700', growth: 3, weight: 1 },
+}
+
+/** Snake length (head plus body segments) that wins the game. */
+export const WIN_LENGTH = 30
 
 /** Playfield background color. */
 export const SCREEN_BACKGROUND_COLOR = '#000'
