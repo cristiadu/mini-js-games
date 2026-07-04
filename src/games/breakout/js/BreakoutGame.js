@@ -66,17 +66,24 @@ export default class BreakoutGame {
   /* eslint-enable no-unused-vars */
 
   /**
-   * Bounces the ball off the paddle when they intersect.
+   * Bounces the ball off the paddle when a downward-moving ball overlaps it,
+   * then rests the ball on the paddle's top so it cannot collide again on the
+   * next step. A ball that has already fallen past the paddle is left alone
+   * and drops out at the bottom.
    *
    * @returns {boolean} True when the ball hit the paddle this step.
    */
   checkCollisionBallwithPaddle = () => {
     let collides = false
 
-    if (((this.ball.Y + this.ball.radius) >= this.playerPaddle.Y) && (this.playerPaddle.X <= this.ball.X)
+    if ((this.ball.vY > 0)
+      && ((this.ball.Y + this.ball.radius) >= this.playerPaddle.Y)
+      && ((this.ball.Y - this.ball.radius) <= (this.playerPaddle.Y + THICKNESS_PADDLE))
+      && (this.playerPaddle.X <= this.ball.X)
       && ((this.playerPaddle.X + SIZE_PADDLE) >= this.ball.X)) {
       const bounceAngle = this.playerPaddle.getBounceAngle(this.ball.X)
       this.ball.changeDirection(bounceAngle)
+      this.ball.Y = this.playerPaddle.Y - this.ball.radius
       collides = true
     }
 
@@ -114,7 +121,7 @@ export default class BreakoutGame {
 
   /** Resets the paddle, ball and lives, and rebuilds the full block grid (also runs on restart). */
   init = () => {
-    const paddleInitialX = window.game.width / 2
+    const paddleInitialX = (window.game.width - SIZE_PADDLE) / 2
     const paddleInitialY = window.game.height - THICKNESS_PADDLE - 10
     this.playerPaddle.init(paddleInitialX, paddleInitialY)
 
