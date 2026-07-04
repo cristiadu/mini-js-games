@@ -28,11 +28,11 @@ export const FOOD_SIZE = 6
 /** Cell size in pixels: the snake is drawn and moves in steps of this size. */
 export const SIZE_SNAKE = 8
 
-/** Head starting X position in pixels. */
-export const SNAKE_INITIAL_X = 2
+/** Head starting X position in pixels: two grid cells in, so the two starting body segments spawn on-screen. */
+export const SNAKE_INITIAL_X = SIZE_SNAKE * 2
 
-/** Head starting Y position in pixels. */
-export const SNAKE_INITIAL_Y = 2
+/** Head starting Y position in pixels: aligned to the same grid as the X position. */
+export const SNAKE_INITIAL_Y = SIZE_SNAKE * 2
 
 /** Food pellet fill color. */
 export const FOOD_COLOR = '#EB9486'
