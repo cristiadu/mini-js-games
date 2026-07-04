@@ -37,6 +37,9 @@ export const BALL_RADIUS = 5
 /** Ball speed in pixels per update after a serve. */
 export const BALL_INITIAL_SPEED = 1
 
+/** Points a player needs to win the match. */
+export const WINNING_SCORE = 5
+
 /** Paddle height in pixels. */
 export const SIZE_PADDLE = 100
 

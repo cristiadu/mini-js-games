@@ -1,12 +1,12 @@
 import Ball from './Ball.js'
 import Paddle from './Paddle.js'
 import {
-  PLAYER_TYPE, POSITION, SCREEN_BACKGROUND_COLOR, SIZE_PADDLE, TEXT_COLOR, THICKNESS_PADDLE,
+  PLAYER_TYPE, POSITION, SCREEN_BACKGROUND_COLOR, SIZE_PADDLE, TEXT_COLOR, THICKNESS_PADDLE, WINNING_SCORE,
 } from './globalVariables.js'
 
 /**
  * Pong: a human paddle (left, arrow keys) against a simple ball-tracking AI
- * (right). Endless — points accumulate in the on-screen score.
+ * (right). First to WINNING_SCORE points wins the match.
  * Implements the GameMachine contract (update/draw/init).
  */
 export default class PongGame {
@@ -86,7 +86,8 @@ export default class PongGame {
 
   /**
    * Awards a point to the player opposite the wall the ball crossed, then
-   * re-centers the ball.
+   * re-centers the ball for the next serve — or ends the match once either
+   * player reaches the winning score.
    *
    * @param {string} pos POSITION value of the wall the ball went out on.
    */
@@ -95,6 +96,12 @@ export default class PongGame {
       this.player2Paddle.points += 1
     } else if (pos === POSITION.RIGHT) {
       this.player1Paddle.points += 1
+    }
+
+    if (this.player1Paddle.points >= WINNING_SCORE) {
+      this.machine.gameOver('You won!')
+    } else if (this.player2Paddle.points >= WINNING_SCORE) {
+      this.machine.gameOver('You lost!')
     }
 
     this.ball.init(this.width / 2, this.height / 2)
