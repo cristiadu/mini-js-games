@@ -54,13 +54,23 @@ export default class Paddle {
     }
   }
 
-  /** Tracks the ball at reduced speed so the AI stays beatable. */
+  /**
+   * Tracks the ball at reduced speed while it approaches, and drifts back to
+   * the vertical center once it moves away, so the AI is positioned for the
+   * next return but stays beatable. Movement stops inside a small dead zone
+   * around the target so the paddle does not jitter once aligned.
+   */
   moveAI = () => {
-    if ((this.Y + SIZE_PADDLE / 2) > window.game.ball.Y) {
-      this.Y -= REDUCED_SPEED_AI
-    } else if ((this.Y + SIZE_PADDLE / 2) < window.game.ball.Y) {
-      this.Y += REDUCED_SPEED_AI
+    const ball = window.game.ball
+    const ballApproaching = this.position === POSITION.RIGHT ? ball.vX > 0 : ball.vX < 0
+    const targetY = ballApproaching ? ball.Y : window.game.height / 2
+    const distance = targetY - (this.Y + SIZE_PADDLE / 2)
+
+    if (Math.abs(distance) <= REDUCED_SPEED_AI) {
+      return
     }
+
+    this.Y += distance > 0 ? REDUCED_SPEED_AI : -REDUCED_SPEED_AI
   }
 
   /**
