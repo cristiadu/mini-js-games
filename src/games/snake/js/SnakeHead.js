@@ -19,8 +19,9 @@ export default class SnakeHead {
   }
 
   /**
-   * Advances one cell in the current direction, grows and respawns the food if
-   * eating, propagates movement down the body, then checks collisions.
+   * Advances one cell in the current direction, grows by the eaten variety's
+   * growth and respawns the food if eating, propagates movement down the
+   * body, then checks collisions.
    */
   update = () => {
     switch (this.direction) {
@@ -42,7 +43,9 @@ export default class SnakeHead {
     }
 
     if (this.isEatingFood()) {
-      this.body.increase()
+      for (let i = 0; i < window.game.food.type.growth; i += 1) {
+        this.body.increase()
+      }
       window.game.food.generateFood()
     }
 
